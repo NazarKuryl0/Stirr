@@ -2,7 +2,8 @@ import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import SplashScreenPhone from './Phone/SplashScreen';
+import WelcomePagePhone from './Phone/WelcomePage';
+import OTTPagePhone from './Phone/OTTPage';
 
 let routeConfigMap;
 if (Platform.isTVOS) {
@@ -10,7 +11,8 @@ if (Platform.isTVOS) {
   };
 } else {
   routeConfigMap = {
-    MainScreen: SplashScreenPhone,
+    MainScreen: WelcomePagePhone,
+    OTTPage: OTTPagePhone,
   };
 }
 

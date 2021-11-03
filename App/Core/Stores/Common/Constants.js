@@ -1,0 +1,1 @@
+export const SET_STATION = 'STATION::SET_STATION';
