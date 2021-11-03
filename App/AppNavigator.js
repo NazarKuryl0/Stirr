@@ -7,8 +7,7 @@ import OTTPagePhone from './Phone/OTTPage';
 
 let routeConfigMap;
 if (Platform.isTVOS) {
-  routeConfigMap = {
-  };
+  routeConfigMap = {};
 } else {
   routeConfigMap = {
     MainScreen: WelcomePagePhone,

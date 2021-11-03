@@ -5,10 +5,10 @@ import rootSaga from '../Sagas';
 import configureStore from './CreateStore';
 
 export default () => {
-    const rootReducer = combineReducers({
-      config,
-      common,
-    });
-  
-    return configureStore(rootReducer, rootSaga);
-  };
+  const rootReducer = combineReducers({
+    config,
+    common,
+  });
+
+  return configureStore(rootReducer, rootSaga);
+};

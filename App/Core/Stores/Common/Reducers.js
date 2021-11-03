@@ -1,19 +1,19 @@
 import * as actionTypes from './Constants';
 
 const initialState = {
-    station: undefined,
+  station: undefined,
 };
 
 const commonReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.SET_STATION:
-            return {
-                ...state,
-                station: action.station,
-            };
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case actionTypes.SET_STATION:
+      return {
+        ...state,
+        station: action.station,
+      };
+    default:
+      return state;
+  }
+};
 
 export default commonReducer;
