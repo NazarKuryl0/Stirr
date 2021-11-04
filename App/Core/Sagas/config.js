@@ -2,6 +2,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 
 import * as actionTypes from '../Stores/Config/Constants';
 import { getData } from '../Services/ConfigServices';
+import { converterToRGBA } from '../Services/Helpers';
 
 function* fetchConfig() {
   const configURL =
@@ -18,16 +19,33 @@ function* fetchConfig() {
       city_auto_select: { timer },
       nav_city_auto_select,
       nav,
+      theme: { button },
     } = configData.data.API;
     const navURL = features.city_auto_select ? nav_city_auto_select : nav;
     const {
       data: { navigation: navData },
     } = yield call(() => getData(navURL));
+    const buttonStyles = {
+      default: {
+        borderRadius: +button.border_size,
+        color: converterToRGBA(button.text_color.rgba[0]),
+      },
+      active: {
+        backgroundColor: converterToRGBA(button.color_on.linear_gradient[1].rgba[0]),
+      },
+      inActive: {
+        backgroundColor: converterToRGBA(button.color_off.rgba[0]),
+      }
+    };
+    const appStyles = {
+      buttonStyles,
+    }
     yield put({
       type: actionTypes.FETCH_CONFIG_SUCCEEDED,
       payload: {
         timer,
         navData,
+        appStyles,
       },
     });
   }

@@ -1,1 +1,1 @@
-export const SET_STATION = 'STATION::SET_STATION';
+export const SET_STATION = 'SET_STATION';

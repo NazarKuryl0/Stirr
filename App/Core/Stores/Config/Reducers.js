@@ -3,6 +3,7 @@ import * as actionTypes from './Constants';
 const initialState = {
   navData: undefined,
   timer: undefined,
+  appStyles: undefined,
   isLoading: false,
   error: undefined,
 };
@@ -21,6 +22,7 @@ const configReducer = (state = initialState, action) => {
         isLoading: false,
         timer: action.payload.timer,
         navData: action.payload.navData,
+        appStyles: action.payload.appStyles,
       };
     case actionTypes.FETCH_CONFIG_FAILED:
       return {
