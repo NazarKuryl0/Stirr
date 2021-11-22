@@ -1,46 +1,35 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-import { fetchStationAutoSelectionData } from '../../Core/Stores/OTTPage/Actions';
-import { setStation } from '../../Core/Stores/Common/Actions';
 import { styles } from './styles';
 
-class OTTPage extends Component {
+export default class FullScreenCard extends Component {
   state = {
-    time: this.props.timer,
+    time: 2,
     disabledButton: true,
   };
   componentDidMount() {
-    const { station, navData, fetchStationAutoSelectionData } = this.props;
     setInterval(() => {
       const { time } = this.state;
       time > 0 ? this.setState({ time: time - 1 }) : this.setState({ disabledButton: false });
     }, 1000);
-    if (!station) {
-      fetchStationAutoSelectionData(navData[0].path);
-    }
   }
   handleButtonPress = () => {
-    const { setStation, newStation } = this.props;
-    setStation(newStation);
+    const { fetchOTTPageData, pageData } = this.props;
+    fetchOTTPageData(
+      pageData.link,
+      pageData.button['media:content']['sinclair:action_config'].station[0]
+    );
   };
   render() {
     const { disabledButton } = this.state;
-    const {
-      appStyles,
-      background,
-      displayTitle,
-      subTitle,
-      logoURL,
-      stationText,
-      promoText,
-      buttonText,
-    } = this.props;
-    const { buttonStyles } = appStyles;
+    const { pageData, buttonStyles } = this.props;
+    const { background, displayTitle, subTitle, logo, button, stationText, promoText } = pageData;
+    const logoURL = logo[0];
+    const buttonText = button['media:content']['media:title'].content;
     return (
-      <View style={styles.root}>
+      <View>
         {background && (
           <FastImage
             source={{
@@ -50,7 +39,7 @@ class OTTPage extends Component {
             style={styles.backgroundImage}
           />
         )}
-        <View style={styles.main}>
+        <View style={styles.mainBlock}>
           <Text>{displayTitle}</Text>
           <Text>{subTitle}</Text>
           {logoURL && (
@@ -81,38 +70,3 @@ class OTTPage extends Component {
     );
   }
 }
-
-const mapStateToProps = ({
-  config: { navData, appStyles, timer },
-  common: { station },
-  OTTPage: {
-    background,
-    displayTitle,
-    subTitle,
-    logoURL,
-    stationText,
-    promoText,
-    buttonText,
-    station: newStation,
-  },
-}) => ({
-  navData,
-  appStyles,
-  timer,
-  station,
-  background,
-  displayTitle,
-  subTitle,
-  logoURL,
-  stationText,
-  promoText,
-  buttonText,
-  newStation,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchStationAutoSelectionData: (url) => dispatch(fetchStationAutoSelectionData(url)),
-  setStation: (station) => dispatch(setStation(station)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(OTTPage);

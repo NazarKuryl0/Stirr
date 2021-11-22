@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchConfig } from '../../Core/Stores/Config/Actions';
-import Navigator from '../../Core/Services/NavigationService';
-import { SPLASH_SCREEN_TIMEOUT } from '../../Core/Constants';
+import { fetchConfig } from '../../../Core/Stores/Config/Actions';
+import Navigator from '../../../Core/Services/NavigationService';
+import { SPLASH_SCREEN_TIMEOUT } from '../../../Core/Constants';
 import { styles } from './styles';
 
-const logo = require('../../Assets/Stirr/Images/Logo.jpg');
-const banner = require('../../Assets/Stirr/Images/CitySelect.png');
+const logo = require('../../../Assets/Stirr/Images/Logo.jpg');
+const banner = require('../../../Assets/Stirr/Images/CitySelect.png');
 
 class WelcomePage extends Component {
   state = {

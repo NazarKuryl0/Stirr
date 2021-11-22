@@ -1,16 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
   backgroundImage: {
     width: '100%',
     height: '100%',
     position: 'absolute',
     zIndex: -1,
   },
-  main: {
+  mainBlock: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 40,

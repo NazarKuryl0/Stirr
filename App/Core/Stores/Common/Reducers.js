@@ -9,7 +9,7 @@ const commonReducer = (state = initialState, action) => {
     case actionTypes.SET_STATION:
       return {
         ...state,
-        station: action.station,
+        station: action.payload.station,
       };
     default:
       return state;

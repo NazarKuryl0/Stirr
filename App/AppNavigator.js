@@ -2,8 +2,8 @@ import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import WelcomePagePhone from './Phone/WelcomePage';
-import OTTPagePhone from './Phone/OTTPage';
+import WelcomePagePhone from './Phone/Pages/WelcomePage';
+import OTTPagePhone from './Phone/Pages/OTTPage';
 
 let routeConfigMap;
 if (Platform.isTVOS) {

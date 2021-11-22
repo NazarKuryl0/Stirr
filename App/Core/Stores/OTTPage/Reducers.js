@@ -1,16 +1,10 @@
 import * as actionTypes from './Constants';
 
 const initialState = {
-  background: undefined,
-  displayTitle: undefined,
-  subTitle: undefined,
-  logoURL: undefined,
-  stationText: undefined,
-  promoText: undefined,
-  buttonText: undefined,
-  station: undefined,
   isLoading: true,
   error: undefined,
+  OTTPageData: undefined,
+  OTTPageComponentsData: undefined,
 };
 
 const OTTPageReducer = (state = initialState, action) => {
@@ -25,16 +19,29 @@ const OTTPageReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        background: action.payload.background,
-        displayTitle: action.payload.displayTitle,
-        subTitle: action.payload.subTitle,
-        logoURL: action.payload.logoURL,
-        stationText: action.payload.stationText,
-        promoText: action.payload.promoText,
-        buttonText: action.payload.buttonText,
-        station: action.payload.station,
+        OTTPageData: action.payload.page,
+        OTTPageComponentsData: undefined,
       };
     case actionTypes.FETCH_STATION_AUTO_SELECTION_DATA_SUCCEEDED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error,
+      };
+    case actionTypes.FETCH_OTTPAGE_DATA:
+      return {
+        ...state,
+        isLoading: true,
+        error: undefined,
+      };
+    case actionTypes.FETCH_OTTPAGE_DATA_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        OTTPageData: action.payload.page,
+        OTTPageComponentsData: action.payload.filteredComponentData,
+      };
+    case actionTypes.FETCH_OTTPAGE_DATA_FAILED:
       return {
         ...state,
         isLoading: false,
