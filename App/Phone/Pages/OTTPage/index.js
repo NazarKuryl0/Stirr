@@ -7,7 +7,7 @@ import {
   fetchOTTPageData,
 } from '../../../Core/Stores/OTTPage/Actions';
 import { setStation } from '../../../Core/Stores/Common/Actions';
-import { FullScreenCard } from '../../Components';
+import { FullScreenCard, CarouselTeaserList } from '../../Components';
 import { styles } from './styles';
 
 class OTTPage extends Component {
@@ -23,11 +23,11 @@ class OTTPage extends Component {
     const {
       appStyles: { buttonStyles },
     } = this.props;
-    const { pageData, fetchOTTPageData } = this.props;
+    const { pageData, fetchOTTPageData, componentsData } = this.props;
     return (
       <View style={styles.root}>
         {pageData &&
-          pageData.map((page) => {
+          pageData.map((page, pageIndex) => {
             switch (page.type) {
               case 'FULL_SCREEN_CARD': {
                 return (
@@ -35,6 +35,13 @@ class OTTPage extends Component {
                     pageData={page}
                     buttonStyles={buttonStyles}
                     fetchOTTPageData={fetchOTTPageData}
+                  />
+                );
+              }
+              case 'CAROUSEL_TEASER_LIST': {
+                return (
+                  <CarouselTeaserList
+                    itemComponentData={componentsData[pageIndex]}
                   />
                 );
               }
@@ -48,12 +55,13 @@ class OTTPage extends Component {
 const mapStateToProps = ({
   config: { navData, appStyles },
   common: { station },
-  OTTPage: { OTTPageData: pageData },
+  OTTPage: { OTTPageData: pageData, OTTPageComponentsData: componentsData },
 }) => ({
   navData,
   appStyles,
   station,
   pageData,
+  componentsData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

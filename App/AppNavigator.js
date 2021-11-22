@@ -2,8 +2,11 @@ import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import WelcomePagePhone from './Phone/Pages/WelcomePage';
-import OTTPagePhone from './Phone/Pages/OTTPage';
+import {
+  WelcomePage as WelcomePagePhone,
+  OTTPage as OTTPagePhone,
+  OTTEpisode as OTTEpisodePhone,
+} from './Phone/Pages';
 
 let routeConfigMap;
 if (Platform.isTVOS) {
@@ -12,6 +15,7 @@ if (Platform.isTVOS) {
   routeConfigMap = {
     MainScreen: WelcomePagePhone,
     OTTPage: OTTPagePhone,
+    OTTEpisode: OTTEpisodePhone,
   };
 }
 
