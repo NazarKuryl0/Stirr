@@ -8,6 +8,7 @@ import {
   OTTEpisode as OTTEpisodePhone,
   SectionPage as SectionPagePhone,
   ShowPage as ShowPagePhone,
+  CitySelection as CitySelectionPhone,
 } from './Phone/Pages';
 
 let routeConfigMap;
@@ -20,6 +21,7 @@ if (Platform.isTVOS) {
     OTTEpisode: OTTEpisodePhone,
     Section: SectionPagePhone,
     ShowPage: ShowPagePhone,
+    CitySelection: CitySelectionPhone,
   };
 }
 

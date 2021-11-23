@@ -9,8 +9,7 @@ import {
 import { fetchShowPageData } from '../../../Core/Stores/ShowPage/Actions';
 import { setStation } from '../../../Core/Stores/Common/Actions';
 import { FullScreenCard, CarouselTeaserList, StandardTeaserList } from '../../Components';
-import FastImage from 'react-native-fast-image';
-import { Background } from '../../Items';
+import { Background, Header } from '../../Items';
 
 import { styles } from './styles';
 
@@ -25,11 +24,14 @@ class OTTPage extends Component {
   }
   render() {
     const {
-      appStyles: { buttonStyles, backgroundURL },
+      appStyles: { buttonStyles, backgroundURL, logo },
     } = this.props;
-    const { pageData, fetchOTTPageData, componentsData, fetchShowPageData } = this.props;
+    const { pageData, fetchOTTPageData, componentsData, fetchShowPageData, navData } = this.props;
     return (
       <ScrollView bounces={false} style={styles.root}>
+        {pageData && pageData[0].type !== 'FULL_SCREEN_CARD' && (
+          <Header renderBurger renderSearch logo={logo} navData={navData} activePage='HOME'/>
+        )}
         {pageData &&
           pageData.map((page, pageIndex) => {
             switch (page.type) {

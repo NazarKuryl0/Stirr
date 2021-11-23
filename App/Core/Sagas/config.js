@@ -21,7 +21,7 @@ function* fetchConfig() {
       nav,
       theme: {
         button,
-        general: { background },
+        general: { background, logo_color },
       },
     } = configData.data.API;
     const navURL = features.city_auto_select ? nav_city_auto_select : nav;
@@ -40,10 +40,10 @@ function* fetchConfig() {
         backgroundColor: converterToRGBA(button.color_off.rgba[0]),
       },
     };
-    const backgroundURL = background;
     const appStyles = {
       buttonStyles,
-      backgroundURL,
+      backgroundURL: background,
+      logo: logo_color,
     };
     yield put({
       type: actionTypes.FETCH_CONFIG_SUCCEEDED,
