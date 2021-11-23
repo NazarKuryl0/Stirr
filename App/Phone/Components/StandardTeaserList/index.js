@@ -9,25 +9,21 @@ import { styles } from './styles';
 
 export default class StandardTeaserList extends Component {
   handleCardPress = (item) => {
-    const {fetchShowPageData} = this.props;
-    switch (item.linkType) {
-      case 'episode': {
-        Navigator.navigate('OTTEpisode')
-      }
-      case 'section': {
-        Navigator.navigate('Section')
-      }
-      default: {
-        fetchShowPageData(item.link)
-        Navigator.navigate('ShowPage')
-      }
+    const { fetchShowPageData } = this.props;
+    if (item.linkType === 'episode') {
+      Navigator.navigate('OTTEpisode');
+    } else if (item.linkType === 'section') {
+      Navigator.navigate('Section');
+    } else {
+      fetchShowPageData(item.link);
+      Navigator.navigate('ShowPage');
     }
   };
   render() {
     const { itemComponentData, title } = this.props;
     return (
       <View style={styles.root}>
-        <Text>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
         <ScrollView
           horizontal
           bounces={false}
@@ -36,7 +32,7 @@ export default class StandardTeaserList extends Component {
         >
           {itemComponentData.map((component) => {
             const { item } = component;
-            const imageURL = item['media:content']['media:thumbnail'][9].url;
+            const imageURL = item['media:content']['media:thumbnail'][0].url;
             const title = item['media:content']['media:title'].content;
             const videoDuration = +item['media:content'].duration;
             return (
@@ -48,17 +44,19 @@ export default class StandardTeaserList extends Component {
                 <View>
                   <FastImage
                     source={{
-                      uri: 'https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg',
+                      uri: imageURL,
                     }}
                     style={styles.imageBlock}
                   />
                   {!!videoDuration && (
                     <View style={styles.durationBlock}>
-                      <Text>{convertTime(videoDuration)}</Text>
+                      <Text style={styles.duration}>{convertTime(videoDuration)}</Text>
                     </View>
                   )}
                 </View>
-                <Text>{title}</Text>
+                <View style={styles.showTitleBlock}>
+                  <Text style={styles.showTitle}>{title}</Text>
+                </View>
               </TouchableOpacity>
             );
           })}

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 
 import Navigator from '../../../Core/Services/NavigationService';
+import { BackButton, Background } from '../../Items';
 
 import { styles } from './styles';
 
@@ -21,17 +22,20 @@ class ShowPage extends Component {
     }
   };
   render() {
-    const { showData, seasonsData } = this.props;
+    const { showData, seasonsData, appStyles } = this.props;
     const { activeSeason } = this.state;
     const seasonToDisplay = seasonsData && seasonsData.seasonsData[activeSeason];
+    const { backgroundURL } = appStyles;
     return (
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         {showData && (
           <View style={styles.showDataBlock}>
             <FastImage source={{ uri: showData.image }} style={styles.showDataImageBlock} />
             <View style={styles.showDataDescriptionBlock}>
-              <Text>{showData.title}</Text>
-              <Text>{showData.description}</Text>
+              <View style={styles.showTitleBlock}>
+                <Text style={styles.showTitle}>{showData.title}</Text>
+              </View>
+              <Text style={styles.showSubtitle}>{showData.description}</Text>
             </View>
           </View>
         )}
@@ -46,7 +50,7 @@ class ShowPage extends Component {
                     activeSeason === index && styles.activeSeasonTitleBlock,
                   ]}
                 >
-                  <Text>{title}</Text>
+                  <Text style={styles.seasonTitle}>{title}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -61,19 +65,22 @@ class ShowPage extends Component {
                       style={styles.espideBlock}
                     >
                       <FastImage source={{ uri: imageURL }} style={styles.espideImageBlock} />
-                      <Text>{title}</Text>
+                      <Text style={styles.episodeTitle}>{title}</Text>
                     </TouchableOpacity>
                   );
                 })}
             </View>
           </View>
         )}
+        <BackButton />
+        <Background url={backgroundURL} />
       </ScrollView>
     );
   }
 }
 
-const mapStateToProps = ({ ShowPage: { showData, seasonsData } }) => ({
+const mapStateToProps = ({ config: { appStyles }, ShowPage: { showData, seasonsData } }) => ({
+  appStyles,
   showData,
   seasonsData,
 });

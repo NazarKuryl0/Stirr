@@ -9,6 +9,9 @@ import {
 import { fetchShowPageData } from '../../../Core/Stores/ShowPage/Actions';
 import { setStation } from '../../../Core/Stores/Common/Actions';
 import { FullScreenCard, CarouselTeaserList, StandardTeaserList } from '../../Components';
+import FastImage from 'react-native-fast-image';
+import { Background } from '../../Items';
+
 import { styles } from './styles';
 
 class OTTPage extends Component {
@@ -22,7 +25,7 @@ class OTTPage extends Component {
   }
   render() {
     const {
-      appStyles: { buttonStyles },
+      appStyles: { buttonStyles, backgroundURL },
     } = this.props;
     const { pageData, fetchOTTPageData, componentsData, fetchShowPageData } = this.props;
     return (
@@ -53,6 +56,7 @@ class OTTPage extends Component {
               }
             }
           })}
+        <Background url={backgroundURL} />
       </ScrollView>
     );
   }

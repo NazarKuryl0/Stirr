@@ -3,24 +3,37 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   root: {
     marginLeft: 20,
+    marginTop: 27,
+  },
+  title: {
+    fontSize: 16,
+    color: '#ffffff',
   },
   scrollBlock: {
-    marginTop: 24,
-    marginBottom: 24,
+    marginTop: 14,
   },
   showBlock: {
-    width: 280,
-    height: 157.5,
     marginRight: 20,
-    marginBottom: 14,
   },
   imageBlock: {
-    width: '100%',
-    height: '100%',
+    width: 248,
+    height: 140,
+    backgroundColor: 'black',
+  },
+  showTitleBlock: {
+    marginTop: 16,
+  },
+  showTitle: {
+    color: '#ffffff',
+    fontSize: 14,
   },
   durationBlock: {
     position: 'absolute',
     bottom: 10,
     right: 10,
+  },
+  duration: {
+    fontSize: 14,
+    color: '#ffffff',
   },
 });

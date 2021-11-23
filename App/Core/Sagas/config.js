@@ -19,7 +19,10 @@ function* fetchConfig() {
       city_auto_select: { timer },
       nav_city_auto_select,
       nav,
-      theme: { button },
+      theme: {
+        button,
+        general: { background },
+      },
     } = configData.data.API;
     const navURL = features.city_auto_select ? nav_city_auto_select : nav;
     const {
@@ -35,11 +38,13 @@ function* fetchConfig() {
       },
       inActive: {
         backgroundColor: converterToRGBA(button.color_off.rgba[0]),
-      }
+      },
     };
+    const backgroundURL = background;
     const appStyles = {
       buttonStyles,
-    }
+      backgroundURL,
+    };
     yield put({
       type: actionTypes.FETCH_CONFIG_SUCCEEDED,
       payload: {

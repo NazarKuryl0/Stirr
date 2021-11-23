@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
+import { convertTime } from '../../../Core/Utils';
+
 import { styles } from './styles';
 
 export default class FullScreenCard extends Component {
   state = {
-    time: 0,
+    time: 2,
     disabledButton: true,
   };
   componentDidMount() {
@@ -23,7 +25,7 @@ export default class FullScreenCard extends Component {
     );
   };
   render() {
-    const { disabledButton } = this.state;
+    const { disabledButton, time } = this.state;
     const { pageData, buttonStyles } = this.props;
     const { background, displayTitle, subTitle, logo, button, stationText, promoText } = pageData;
     const logoURL = logo[0];
@@ -40,8 +42,8 @@ export default class FullScreenCard extends Component {
           />
         )}
         <View style={styles.mainBlock}>
-          <Text>{displayTitle}</Text>
-          <Text>{subTitle}</Text>
+          <Text style={styles.title}>{displayTitle}</Text>
+          <Text style={styles.subtitle}>{subTitle}</Text>
           {logoURL && (
             <FastImage
               source={{
@@ -52,6 +54,7 @@ export default class FullScreenCard extends Component {
               style={styles.logo}
             />
           )}
+          <Text style={styles.station}>{stationText}</Text>
           <TouchableOpacity
             disabled={disabledButton}
             style={[
@@ -63,8 +66,14 @@ export default class FullScreenCard extends Component {
           >
             <Text>{buttonText}</Text>
           </TouchableOpacity>
-          <Text>{stationText}</Text>
-          <Text>{promoText}</Text>
+          {disabledButton && (
+            <View>
+              <Text style={styles.time}>{convertTime(time)}</Text>
+            </View>
+          )}
+          <View style={styles.promoTextBlock}>
+            <Text style={styles.promoText}>{promoText}</Text>
+          </View>
         </View>
       </View>
     );
