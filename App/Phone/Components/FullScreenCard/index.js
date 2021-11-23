@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 export default class FullScreenCard extends Component {
   state = {
-    time: 2,
+    time: 0,
     disabledButton: true,
   };
   componentDidMount() {

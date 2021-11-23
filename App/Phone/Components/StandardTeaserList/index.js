@@ -9,6 +9,7 @@ import { styles } from './styles';
 
 export default class StandardTeaserList extends Component {
   handleCardPress = (item) => {
+    const {fetchShowPageData} = this.props;
     switch (item.linkType) {
       case 'episode': {
         Navigator.navigate('OTTEpisode')
@@ -17,6 +18,7 @@ export default class StandardTeaserList extends Component {
         Navigator.navigate('Section')
       }
       default: {
+        fetchShowPageData(item.link)
         Navigator.navigate('ShowPage')
       }
     }

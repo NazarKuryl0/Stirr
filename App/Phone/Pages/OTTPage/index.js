@@ -6,6 +6,7 @@ import {
   fetchStationAutoSelectionData,
   fetchOTTPageData,
 } from '../../../Core/Stores/OTTPage/Actions';
+import { fetchShowPageData } from '../../../Core/Stores/ShowPage/Actions';
 import { setStation } from '../../../Core/Stores/Common/Actions';
 import { FullScreenCard, CarouselTeaserList, StandardTeaserList } from '../../Components';
 import { styles } from './styles';
@@ -23,7 +24,7 @@ class OTTPage extends Component {
     const {
       appStyles: { buttonStyles },
     } = this.props;
-    const { pageData, fetchOTTPageData, componentsData } = this.props;
+    const { pageData, fetchOTTPageData, componentsData, fetchShowPageData } = this.props;
     return (
       <ScrollView bounces={false} style={styles.root}>
         {pageData &&
@@ -45,6 +46,7 @@ class OTTPage extends Component {
                 return (
                   <StandardTeaserList
                     title={page.displayTitle}
+                    fetchShowPageData={fetchShowPageData}
                     itemComponentData={componentsData[pageIndex]}
                   />
                 );
@@ -72,6 +74,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchStationAutoSelectionData: (url) => dispatch(fetchStationAutoSelectionData(url)),
   fetchOTTPageData: (url, station) => dispatch(fetchOTTPageData(url, station)),
   setStation: (station) => dispatch(setStation(station)),
+  fetchShowPageData: (url) => dispatch(fetchShowPageData(url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OTTPage);
