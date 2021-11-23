@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import {
   fetchStationAutoSelectionData,
   fetchOTTPageData,
 } from '../../../Core/Stores/OTTPage/Actions';
 import { setStation } from '../../../Core/Stores/Common/Actions';
-import { FullScreenCard, CarouselTeaserList } from '../../Components';
+import { FullScreenCard, CarouselTeaserList, StandardTeaserList } from '../../Components';
 import { styles } from './styles';
 
 class OTTPage extends Component {
@@ -25,7 +25,7 @@ class OTTPage extends Component {
     } = this.props;
     const { pageData, fetchOTTPageData, componentsData } = this.props;
     return (
-      <View style={styles.root}>
+      <ScrollView bounces={false} style={styles.root}>
         {pageData &&
           pageData.map((page, pageIndex) => {
             switch (page.type) {
@@ -39,15 +39,19 @@ class OTTPage extends Component {
                 );
               }
               case 'CAROUSEL_TEASER_LIST': {
+                return <CarouselTeaserList itemComponentData={componentsData[pageIndex]} />;
+              }
+              case 'STANDARD_TEASER_LIST': {
                 return (
-                  <CarouselTeaserList
+                  <StandardTeaserList
+                    title={page.displayTitle}
                     itemComponentData={componentsData[pageIndex]}
                   />
                 );
               }
             }
           })}
-      </View>
+      </ScrollView>
     );
   }
 }

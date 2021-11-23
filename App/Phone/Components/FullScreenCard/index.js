@@ -29,7 +29,7 @@ export default class FullScreenCard extends Component {
     const logoURL = logo[0];
     const buttonText = button['media:content']['media:title'].content;
     return (
-      <View>
+      <View style={styles.root}>
         {background && (
           <FastImage
             source={{

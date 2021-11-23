@@ -6,6 +6,8 @@ import {
   WelcomePage as WelcomePagePhone,
   OTTPage as OTTPagePhone,
   OTTEpisode as OTTEpisodePhone,
+  SectionPage as SectionPagePhone,
+  ShowPage as ShowPagePhone,
 } from './Phone/Pages';
 
 let routeConfigMap;
@@ -16,6 +18,8 @@ if (Platform.isTVOS) {
     MainScreen: WelcomePagePhone,
     OTTPage: OTTPagePhone,
     OTTEpisode: OTTEpisodePhone,
+    Section: SectionPagePhone,
+    ShowPage: ShowPagePhone,
   };
 }
 
