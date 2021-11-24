@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: 43,
     left: 20,
+    zIndex: 2,
   },
   modalMainBlock: {
     height: '100%',

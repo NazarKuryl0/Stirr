@@ -7,13 +7,16 @@ import {
   fetchOTTPageData,
 } from '../../../Core/Stores/OTTPage/Actions';
 import { fetchShowPageData } from '../../../Core/Stores/ShowPage/Actions';
-import { setStation } from '../../../Core/Stores/Common/Actions';
+import { fetchCitySelectionData } from '../../../Core/Stores/CitySelection/Actions';
 import { FullScreenCard, CarouselTeaserList, StandardTeaserList } from '../../Components';
 import { Background, Header } from '../../Items';
 
 import { styles } from './styles';
 
 class OTTPage extends Component {
+  state = {
+    needUpdate: this.props.navigation.state.params?.needUpdatePage,
+  };
   componentDidMount() {
     const { station, navData, fetchStationAutoSelectionData } = this.props;
     if (!station) {
@@ -23,14 +26,34 @@ class OTTPage extends Component {
     }
   }
   render() {
+    const { needUpdate } = this.state;
     const {
       appStyles: { buttonStyles, backgroundURL, logo },
     } = this.props;
-    const { pageData, fetchOTTPageData, componentsData, fetchShowPageData, navData } = this.props;
+    const {
+      pageData,
+      fetchOTTPageData,
+      componentsData,
+      fetchShowPageData,
+      navData,
+      station,
+      fetchCitySelectionData,
+    } = this.props;
+    if (needUpdate) {
+      this.setState({ needUpdate: false });
+      fetchOTTPageData(navData[0].path, station);
+    }
     return (
       <ScrollView bounces={false} style={styles.root}>
         {pageData && pageData[0].type !== 'FULL_SCREEN_CARD' && (
-          <Header renderBurger renderSearch logo={logo} navData={navData} activePage='HOME'/>
+          <Header
+            renderBurger
+            renderSearch
+            logo={logo}
+            navData={navData}
+            activePage="HOME"
+            fetchCitySelectionData={fetchCitySelectionData}
+          />
         )}
         {pageData &&
           pageData.map((page, pageIndex) => {
@@ -79,8 +102,8 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   fetchStationAutoSelectionData: (url) => dispatch(fetchStationAutoSelectionData(url)),
   fetchOTTPageData: (url, station) => dispatch(fetchOTTPageData(url, station)),
-  setStation: (station) => dispatch(setStation(station)),
   fetchShowPageData: (url) => dispatch(fetchShowPageData(url)),
+  fetchCitySelectionData: (url) => dispatch(fetchCitySelectionData(url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OTTPage);

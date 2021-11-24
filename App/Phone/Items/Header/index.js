@@ -18,12 +18,13 @@ export default class Header extends Component {
     this.setState({ isOpenBurger: !isOpenBurger });
   };
   handleNavPress = (item) => {
-    const { activePage } = this.props;
+    const { activePage, fetchCitySelectionData } = this.props;
     if (item.title === activePage) {
       this.setState({ isOpenBurger: false });
-    } else if (item.tag === "citySelection") {
+    } else if (item.tag === 'citySelection') {
       this.setState({ isOpenBurger: false });
-      Navigator.navigate('CitySelection')
+      fetchCitySelectionData(item.path);
+      Navigator.navigate('CitySelection');
     }
   };
   render() {

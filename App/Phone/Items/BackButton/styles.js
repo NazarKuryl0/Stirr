@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   backButtonBlock: {
     position: 'absolute',
-    top: 50,
+    top: 20,
     zIndex: 1,
     flexDirection: 'row',
     alignItems: 'center',
