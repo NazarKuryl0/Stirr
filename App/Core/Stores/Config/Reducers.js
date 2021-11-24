@@ -15,11 +15,15 @@ const configReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: undefined,
+        navData: undefined,
+        timer: undefined,
+        appStyles: undefined,
       };
     case actionTypes.FETCH_CONFIG_SUCCEEDED:
       return {
         ...state,
         isLoading: false,
+        error: undefined,
         timer: action.payload.timer,
         navData: action.payload.navData,
         appStyles: action.payload.appStyles,
@@ -27,6 +31,9 @@ const configReducer = (state = initialState, action) => {
     case actionTypes.FETCH_CONFIG_FAILED:
       return {
         ...state,
+        navData: undefined,
+        timer: undefined,
+        appStyles: undefined,
         isLoading: false,
         error: action.error,
       };

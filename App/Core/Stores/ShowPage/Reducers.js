@@ -14,6 +14,8 @@ const OTTPageReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: undefined,
+        showData: undefined,
+        seasonsData: undefined,
       };
     case actionTypes.FETCH_SHOW_PAGE_DATA_SUCCESS:
       return {

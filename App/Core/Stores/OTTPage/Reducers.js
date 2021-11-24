@@ -14,6 +14,8 @@ const OTTPageReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: undefined,
+        OTTPageData: undefined,
+        OTTPageComponentsData: undefined,
       };
     case actionTypes.FETCH_STATION_AUTO_SELECTION_DATA_SUCCEEDED:
       return {
@@ -33,6 +35,8 @@ const OTTPageReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: undefined,
+        OTTPageData: undefined,
+        OTTPageComponentsData: undefined,
       };
     case actionTypes.FETCH_OTTPAGE_DATA_SUCCESS:
       return {
