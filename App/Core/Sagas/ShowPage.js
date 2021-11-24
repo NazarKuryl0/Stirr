@@ -29,27 +29,29 @@ function* fetchShowPageData(d) {
         ].url,
     };
 
-    const seasons = page.filter((p) => p.type === 'SEASON_GRID_TEASER_LIST');
+    const seasons = page.filter(
+      (p) => p.type === 'SEASON_GRID_TEASER_LIST' || p.type === 'GRID_TEASER_LIST'
+    );
     const seasonsData = yield all(
-      seasons.map((season)=>{
-        return call(()=>getData(season.content))
+      seasons.map((season) => {
+        return call(() => getData(season.content));
       })
-    )
+    );
     const filteredSeasonsData = {
-      titles: seasons.map((season)=>{
-        return season.title
+      titles: seasons.map((season) => {
+        return season.title;
       }),
-      seasonsData: seasonsData.map((season=>{
-        return season.data.rss.channel.pagecomponent.component
-      }))
-    }
+      seasonsData: seasonsData.map((season) => {
+        return season.data.rss.channel.pagecomponent.component;
+      }),
+    };
     yield put({
       type: actionTypes.FETCH_SHOW_PAGE_DATA_SUCCESS,
       payload: {
         filteredShowData,
         filteredSeasonsData,
-      }
-    })
+      },
+    });
   }
 }
 
