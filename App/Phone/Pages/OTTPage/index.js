@@ -8,6 +8,7 @@ import {
 } from '../../../Core/Stores/OTTPage/Actions';
 import { fetchShowPageData } from '../../../Core/Stores/ShowPage/Actions';
 import { fetchCitySelectionData } from '../../../Core/Stores/CitySelection/Actions';
+import { fetchSectionPageData } from '../../../Core/Stores/SectionPage/Actions';
 import { FullScreenCard, CarouselTeaserList, StandardTeaserList } from '../../Components';
 import { Background, Header } from '../../Items';
 
@@ -38,6 +39,7 @@ class OTTPage extends Component {
       navData,
       station,
       fetchCitySelectionData,
+      fetchSectionPageData,
     } = this.props;
     if (needUpdate) {
       this.setState({ needUpdate: false });
@@ -75,6 +77,7 @@ class OTTPage extends Component {
                   <StandardTeaserList
                     title={page.displayTitle}
                     fetchShowPageData={fetchShowPageData}
+                    fetchSectionPageData={fetchSectionPageData}
                     itemComponentData={componentsData[pageIndex]}
                   />
                 );
@@ -104,6 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchOTTPageData: (url, station) => dispatch(fetchOTTPageData(url, station)),
   fetchShowPageData: (url) => dispatch(fetchShowPageData(url)),
   fetchCitySelectionData: (url) => dispatch(fetchCitySelectionData(url)),
+  fetchSectionPageData: (url) => dispatch(fetchSectionPageData(url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OTTPage);

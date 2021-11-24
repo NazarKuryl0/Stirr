@@ -9,10 +9,11 @@ import { styles } from './styles';
 
 export default class StandardTeaserList extends Component {
   handleCardPress = (item) => {
-    const { fetchShowPageData } = this.props;
+    const { fetchShowPageData, fetchSectionPageData } = this.props;
     if (item.linkType === 'episode') {
       Navigator.navigate('OTTEpisode');
     } else if (item.linkType === 'section') {
+      fetchSectionPageData(item.link);
       Navigator.navigate('Section');
     } else {
       fetchShowPageData(item.link);

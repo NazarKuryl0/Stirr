@@ -45,6 +45,9 @@ export const styles = StyleSheet.create({
     marginTop: 35,
     marginBottom: 26,
   },
+  timeBlock: {
+    height: 20,
+  },
   time: {
     fontSize: 18,
     color: '#FFDA3A',

@@ -4,6 +4,7 @@ import common from './Common/Reducers';
 import OTTPage from './OTTPage/Reducers';
 import ShowPage from './ShowPage/Reducers';
 import CitySelection from './CitySelection/Reducers';
+import SectionPage from './SectionPage/Reducers';
 import rootSaga from '../Sagas';
 import configureStore from './CreateStore';
 
@@ -14,6 +15,7 @@ export default () => {
     OTTPage,
     ShowPage,
     CitySelection,
+    SectionPage,
   });
 
   return configureStore(rootReducer, rootSaga);

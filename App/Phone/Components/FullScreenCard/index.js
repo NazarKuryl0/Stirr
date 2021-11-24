@@ -66,11 +66,9 @@ export default class FullScreenCard extends Component {
           >
             <Text>{buttonText}</Text>
           </TouchableOpacity>
-          {disabledButton && (
-            <View>
-              <Text style={styles.time}>{convertTime(time)}</Text>
-            </View>
-          )}
+          <View style={styles.timeBlock}>
+            {disabledButton && <Text style={styles.time}>{convertTime(time)}</Text>}
+          </View>
           <View style={styles.promoTextBlock}>
             <Text style={styles.promoText}>{promoText}</Text>
           </View>
