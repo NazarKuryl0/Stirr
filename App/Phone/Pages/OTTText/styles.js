@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   title: {
     color: '#ffffff',
     fontSize: 18,
+    fontFamily: 'Montserrat-Bold',
     textAlign: 'center',
   },
   mainBlock: {
