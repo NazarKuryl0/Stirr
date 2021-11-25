@@ -25,6 +25,9 @@ export default class Header extends Component {
       this.setState({ isOpenBurger: false });
       fetchCitySelectionData(item.path);
       Navigator.navigate('CitySelection');
+    } else if (item.type === 'OTTSettings') {
+      this.setState({ isOpenBurger: false });
+      Navigator.navigate('OTTSettings', item);
     }
   };
   render() {

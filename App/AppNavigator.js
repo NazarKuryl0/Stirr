@@ -9,6 +9,8 @@ import {
   SectionPage as SectionPagePhone,
   ShowPage as ShowPagePhone,
   CitySelection as CitySelectionPhone,
+  OTTSettings as OTTSettingsPhone,
+  OTTText as OTTTextPhone,
 } from './Phone/Pages';
 
 let routeConfigMap;
@@ -22,6 +24,8 @@ if (Platform.isTVOS) {
     Section: SectionPagePhone,
     ShowPage: ShowPagePhone,
     CitySelection: CitySelectionPhone,
+    OTTSettings: OTTSettingsPhone,
+    OTTText: OTTTextPhone,
   };
 }
 
