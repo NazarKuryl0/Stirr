@@ -2,8 +2,12 @@ import { put, call, takeLatest, all } from 'redux-saga/effects';
 
 import { getData } from '../Services/SectionPage';
 import * as actionTypes from '../Stores/SectionPage/Constants';
+import * as commonActionTypes from '../Stores/Common/Constants';
 
 function* fetchSectionPageData(d) {
+  yield put({
+    type: commonActionTypes.SHOW_LOADER,
+  });
   const { url } = d;
   const data = yield call(() => getData(url));
   if (data.status !== 200) {
@@ -12,6 +16,9 @@ function* fetchSectionPageData(d) {
       payload: {
         error: 'Error in fetching section page data',
       },
+    });
+    yield put({
+      type: commonActionTypes.HIDE_LOADER,
     });
   } else {
     const {
@@ -48,6 +55,9 @@ function* fetchSectionPageData(d) {
         feedTeaserListData: filteredFeedTeaserListData,
         standartTeaserListData: filteredStandartTeaserListData,
       },
+    });
+    yield put({
+      type: commonActionTypes.HIDE_LOADER,
     });
   }
 }

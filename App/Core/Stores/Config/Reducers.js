@@ -4,7 +4,6 @@ const initialState = {
   navData: undefined,
   timer: undefined,
   appStyles: undefined,
-  isLoading: false,
   error: undefined,
 };
 
@@ -13,7 +12,6 @@ const configReducer = (state = initialState, action) => {
     case actionTypes.FETCH_CONFIG:
       return {
         ...state,
-        isLoading: true,
         error: undefined,
         navData: undefined,
         timer: undefined,
@@ -22,7 +20,6 @@ const configReducer = (state = initialState, action) => {
     case actionTypes.FETCH_CONFIG_SUCCEEDED:
       return {
         ...state,
-        isLoading: false,
         error: undefined,
         timer: action.payload.timer,
         navData: action.payload.navData,
@@ -34,7 +31,6 @@ const configReducer = (state = initialState, action) => {
         navData: undefined,
         timer: undefined,
         appStyles: undefined,
-        isLoading: false,
         error: action.error,
       };
     default:

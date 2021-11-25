@@ -1,7 +1,6 @@
 import * as actionTypes from './Constants';
 
 const initialState = {
-  isLoading: false,
   error: undefined,
   teaserData: undefined,
   threeColumTeaserData: undefined,
@@ -13,7 +12,6 @@ const citySelectionReducer = (state = initialState, action) => {
     case actionTypes.FETCH_CITY_SELECTION_DATA:
       return {
         ...state,
-        isLoading: true,
         teaserData: undefined,
         threeColumTeaserData: undefined,
         fourColumTeaserData: undefined,
@@ -22,7 +20,6 @@ const citySelectionReducer = (state = initialState, action) => {
     case actionTypes.FETCH_CITY_SELECTION_DATA_SUCCEEDED:
       return {
         ...state,
-        isLoading: false,
         teaserData: action.payload.filteredTeaserData,
         threeColumTeaserData: action.payload.filteredThreeColumTeaserData,
         fourColumTeaserData: action.payload.filteredFourColumTeaserData,
@@ -30,7 +27,6 @@ const citySelectionReducer = (state = initialState, action) => {
     case actionTypes.FETCH_CITY_SELECTION_DATA_FAILED:
       return {
         ...state,
-        isLoading: false,
         teaserData: undefined,
         fourColumTeaserData: undefined,
         threeColumTeaserData: undefined,

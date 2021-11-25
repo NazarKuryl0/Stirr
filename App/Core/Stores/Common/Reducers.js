@@ -2,6 +2,7 @@ import * as actionTypes from './Constants';
 
 const initialState = {
   station: undefined,
+  isLoading: false,
 };
 
 const commonReducer = (state = initialState, action) => {
@@ -10,6 +11,16 @@ const commonReducer = (state = initialState, action) => {
       return {
         ...state,
         station: action.payload.station,
+      };
+    case actionTypes.SHOW_LOADER:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actionTypes.HIDE_LOADER:
+      return {
+        ...state,
+        isLoading: false,
       };
     default:
       return state;

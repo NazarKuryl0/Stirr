@@ -2,14 +2,21 @@ import { put, call, takeLatest, all } from 'redux-saga/effects';
 import { getData } from '../Services/CitySelection';
 
 import * as actionTypes from '../Stores/CitySelection/Constants';
+import * as commonActionTypes from '../Stores/Common/Constants';
 
 function* fetchCitySelectionData(d) {
+  yield put({
+    type: commonActionTypes.SHOW_LOADER,
+  });
   const { url } = d;
   const citySelectionData = yield call(() => getData(url));
   if (citySelectionData.status !== 200) {
     yield put({
       type: actionTypes.FETCH_CITY_SELECTION_DATA_FAILED,
       error: 'Error in fetching city selection data',
+    });
+    yield put({
+      type: commonActionTypes.HIDE_LOADER,
     });
   } else {
     const {
@@ -53,6 +60,9 @@ function* fetchCitySelectionData(d) {
         filteredThreeColumTeaserData,
         filteredFourColumTeaserData,
       },
+    });
+    yield put({
+      type: commonActionTypes.HIDE_LOADER,
     });
   }
 }

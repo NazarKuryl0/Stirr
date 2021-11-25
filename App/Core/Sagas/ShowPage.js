@@ -2,14 +2,21 @@ import { put, call, takeLatest, all } from 'redux-saga/effects';
 import { getData } from '../Services/ShowPage';
 
 import * as actionTypes from '../Stores/ShowPage/Constants';
+import * as commonActionTypes from '../Stores/Common/Constants';
 
 function* fetchShowPageData(d) {
+  yield put({
+    type: commonActionTypes.SHOW_LOADER,
+  });
   const { url } = d;
   const data = yield call(() => getData(url));
   if (data.status !== 200) {
     yield put({
       type: actionTypes.FETCH_SHOW_PAGE_DATA_FAILED,
       error: 'Error in fetching show page data',
+    });
+    yield put({
+      type: commonActionTypes.HIDE_LOADER,
     });
   } else {
     const {
@@ -51,6 +58,9 @@ function* fetchShowPageData(d) {
         filteredShowData,
         filteredSeasonsData,
       },
+    });
+    yield put({
+      type: commonActionTypes.HIDE_LOADER,
     });
   }
 }
