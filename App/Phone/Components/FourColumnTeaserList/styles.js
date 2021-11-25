@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   title: {
     color: '#ffffff',
     fontSize: 16,
+    fontFamily: 'Montserrat-Bold',
   },
   elementBlock: {
     marginRight: 20,
@@ -20,6 +21,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   elementTitle: {
+    fontFamily: 'Montserrat-SemiBold',
     color: '#ffffff',
     fontSize: 14,
   },

@@ -17,8 +17,9 @@ export const styles = StyleSheet.create({
   itemBlock: {
     marginTop: 24,
   },
-  item: {
+  itemTitle: {
     color: '#ffffff',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
   },
 });

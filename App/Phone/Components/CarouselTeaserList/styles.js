@@ -19,10 +19,12 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     color: '#ffffff',
+    fontFamily: 'Montserrat-SemiBold',
   },
   subtitle: {
     fontSize: 14,
     color: '#ffffff',
+    fontFamily: 'Montserrat-SemiBold',
   },
   dotsContainer: {
     position: 'absolute',

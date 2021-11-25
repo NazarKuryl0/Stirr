@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     color: '#ffffff',
+    fontFamily: 'Montserrat-Bold',
   },
   scrollBlock: {
     marginTop: 14,
@@ -26,6 +27,7 @@ export const styles = StyleSheet.create({
   showTitle: {
     color: '#ffffff',
     fontSize: 14,
+    fontFamily: 'Montserrat-SemiBold',
   },
   durationBlock: {
     position: 'absolute',

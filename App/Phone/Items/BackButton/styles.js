@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     marginRight: -10,
   },
   back: {
+    fontFamily: 'Montserrat-Bold',
     fontSize: 14,
     color: '#ffffff',
   },

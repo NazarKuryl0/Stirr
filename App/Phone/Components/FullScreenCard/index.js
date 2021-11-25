@@ -64,7 +64,7 @@ export default class FullScreenCard extends Component {
             ]}
             onPress={this.handleButtonPress}
           >
-            <Text>{buttonText}</Text>
+            <Text style={styles.button}>{buttonText}</Text>
           </TouchableOpacity>
           <View style={styles.timeBlock}>
             {disabledButton && <Text style={styles.time}>{convertTime(time)}</Text>}

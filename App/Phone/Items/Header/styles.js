@@ -52,5 +52,6 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     color: '#ffffff',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });

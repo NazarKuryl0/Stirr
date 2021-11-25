@@ -38,7 +38,7 @@ class OTTSettings extends Component {
                 onPress={this.handleItemPress.bind(this, item, index)}
                 style={styles.itemBlock}
               >
-                <Text style={styles.item}>{item.title}</Text>
+                <Text style={styles.itemTitle}>{item.title}</Text>
               </TouchableOpacity>
             ))}
         </View>

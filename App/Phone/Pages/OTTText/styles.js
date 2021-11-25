@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   mainBlock: {
-    marginLeft: 20,
+    marginHorizontal: 20,
     marginTop: 40,
   },
   titleBlock: {
@@ -18,5 +18,6 @@ export const styles = StyleSheet.create({
   text: {
     color: '#ffffff',
     fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
   },
 });

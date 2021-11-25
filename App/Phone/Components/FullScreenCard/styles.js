@@ -21,10 +21,12 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     color: '#ffffff',
+    fontFamily: 'Montserrat-Bold',
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 20,
+    fontFamily: 'Montserrat-Regular',
     color: '#FFDA3A',
   },
   logo: {
@@ -34,6 +36,7 @@ export const styles = StyleSheet.create({
   },
   station: {
     fontSize: 18,
+    fontFamily: 'Montserrat-SemiBold',
     color: '#ffffff',
     textAlign: 'center',
   },
@@ -45,10 +48,16 @@ export const styles = StyleSheet.create({
     marginTop: 35,
     marginBottom: 26,
   },
+  button: {
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 14,
+    color: '#000000',
+  },
   timeBlock: {
     height: 20,
   },
   time: {
+    fontFamily: 'Montserrat-Regular',
     fontSize: 18,
     color: '#FFDA3A',
   },
@@ -58,6 +67,7 @@ export const styles = StyleSheet.create({
   },
   promoText: {
     fontSize: 18,
+    fontFamily: 'Montserrat-SemiBold',
     color: '#ffffff',
     textAlign: 'center',
   },

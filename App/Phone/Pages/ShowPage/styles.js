@@ -23,10 +23,12 @@ export const styles = StyleSheet.create({
   },
   showTitle: {
     fontSize: 23,
+    fontFamily: 'Montserrat-Bold',
     color: '#ffffff',
   },
   showSubtitle: {
     fontSize: 14,
+    fontFamily: 'Montserrat-SemiBold',
     color: '#ffffff',
   },
   mainBlock: {
@@ -43,6 +45,7 @@ export const styles = StyleSheet.create({
     marginRight: 20,
   },
   seasonTitle: {
+    fontFamily: 'Montserrat-SemiBold',
     color: '#ffffff',
     fontSize: 18,
   },
@@ -57,6 +60,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   episodeTitle: {
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 16,
     color: '#ffffff',
   },
