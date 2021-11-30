@@ -1,7 +1,6 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects';
 
 import { getData } from '../Services/OTTEpisode';
-import { convertTime } from '../Utils';
 import * as actionTypes from '../Stores/OTTEpisode/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';
 
@@ -26,7 +25,7 @@ function* fetchOTTEpisodePageData(d) {
       subtitle: OTTEpisodeData['media:content']['media:description'].content,
       imageURL: OTTEpisodeData['media:content']['media:thumbnail'][0].url,
       videoURL: OTTEpisodeData.link,
-      duration: convertTime(OTTEpisodeData['media:content'].duration),
+      duration: OTTEpisodeData['media:content'].duration,
     };
     yield put({
       type: actionTypes.FETCH_OTTEPISODE_PAGE_DATA_SUCCESS,
