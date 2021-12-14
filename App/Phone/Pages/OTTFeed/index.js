@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, TouchableOpacity, View, Text } from 'react-native';
+import { ScrollView, TouchableOpacity, View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchCitySelectionData } from '../../../Core/Stores/CitySelection/Actions';
@@ -28,8 +28,22 @@ class OTTFeed extends Component {
       channelsData,
       categories,
     } = this.props;
+    let channelsToDisplay;
+    if (channelsData) {
+      channelsToDisplay =
+        activeCategory === 'All'
+          ? channelsData
+          : channelsData.filter((channel) => {
+              const filteredChannels = channel.categories.filter(
+                (channelCategory) => channelCategory.uuid === activeCategory
+              );
+              if (filteredChannels.length) {
+                return channel;
+              }
+            });
+    }
     return (
-      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+      <View style={styles.root}>
         <Header
           renderBurger
           station={station}
@@ -38,7 +52,7 @@ class OTTFeed extends Component {
           activePage="CHANNELS"
           fetchCitySelectionData={fetchCitySelectionData}
         />
-        {!!channelsData && !!categories && (
+        {!!channelsToDisplay && !!categories && (
           <View>
             <ScrollView
               horizontal
@@ -63,12 +77,15 @@ class OTTFeed extends Component {
                   <TouchableOpacity
                     style={[
                       styles.categoryBlock,
-                      activeCategory === name && styles.activeCategoryBlock,
+                      activeCategory === category.uuid && styles.activeCategoryBlock,
                     ]}
-                    onPress={this.handleCategoryPress.bind(this, name)}
+                    onPress={this.handleCategoryPress.bind(this, category.uuid)}
                   >
                     <Text
-                      style={[styles.category, activeCategory === name && styles.activeCategory]}
+                      style={[
+                        styles.category,
+                        activeCategory === category.uuid && styles.activeCategory,
+                      ]}
                     >
                       {name}
                     </Text>
@@ -76,9 +93,31 @@ class OTTFeed extends Component {
                 );
               })}
             </ScrollView>
+
+            <View style={styles.timeBlock}>
+              <Text style={styles.time}>TODAY</Text>
+            </View>
+            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+              {channelsToDisplay.map((channel) => {
+                const {
+                  num,
+                  icon: { src },
+                } = channel;
+                return (
+                  <View style={styles.channelBlock}>
+                    <Text style={styles.channel}>{num}</Text>
+                    <Image
+                      resizeMethod="contain"
+                      source={{ uri: src }}
+                      style={styles.channelIcon}
+                    />
+                  </View>
+                );
+              })}
+            </ScrollView>
           </View>
         )}
-      </ScrollView>
+      </View>
     );
   }
 }

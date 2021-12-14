@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    minHeight: '100%',
+  },
   categoriesBlock: {
     height: 85,
     backgroundColor: '#000000',
@@ -28,5 +32,35 @@ export const styles = StyleSheet.create({
   },
   activeCategory: {
     color: '#FFDA3A',
+  },
+  timeBlock: {
+    height: 57,
+    width: 83,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  time: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontFamily: 'Montserrat-Bold',
+  },
+  channelBlock: {
+    height: 95,
+    width: 83,
+    backgroundColor: '#202020',
+    borderBottomColor: '#000000',
+    borderBottomWidth: 2,
+    paddingVertical: 20,
+    alignItems: 'center',
+  },
+  channel: {
+    fontSize: 18,
+    color: '#B5B6B8',
+    fontFamily: 'Montserrat-Medium',
+  },
+  channelIcon: {
+    width: 50,
+    height: 30,
   },
 });
