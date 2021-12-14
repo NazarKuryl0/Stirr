@@ -4,6 +4,8 @@ const initialState = {
   navData: undefined,
   timer: undefined,
   appStyles: undefined,
+  channelsListURL: undefined,
+  programsDataURL: undefined,
   error: undefined,
 };
 
@@ -16,6 +18,8 @@ const configReducer = (state = initialState, action) => {
         navData: undefined,
         timer: undefined,
         appStyles: undefined,
+        channelsListURL: undefined,
+        programsDataURL: undefined,
       };
     case actionTypes.FETCH_CONFIG_SUCCEEDED:
       return {
@@ -24,6 +28,8 @@ const configReducer = (state = initialState, action) => {
         timer: action.payload.timer,
         navData: action.payload.navData,
         appStyles: action.payload.appStyles,
+        channelsListURL: action.payload.channelsListURL,
+        programsDataURL: action.payload.programsDataURL,
       };
     case actionTypes.FETCH_CONFIG_FAILED:
       return {
@@ -31,6 +37,8 @@ const configReducer = (state = initialState, action) => {
         navData: undefined,
         timer: undefined,
         appStyles: undefined,
+        channelsListURL: undefined,
+        programsDataURL: undefined,
         error: action.error,
       };
     default:

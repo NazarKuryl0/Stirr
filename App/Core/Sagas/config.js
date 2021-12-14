@@ -26,6 +26,8 @@ function* fetchConfig() {
       city_auto_select: { timer },
       nav_city_auto_select,
       nav,
+      channel_info: programsDataURL,
+      channel_list: channelsListURL,
       theme: {
         button,
         general: { background, logo_color },
@@ -61,6 +63,8 @@ function* fetchConfig() {
         timer,
         navData,
         appStyles,
+        channelsListURL,
+        programsDataURL,
       },
     });
   }

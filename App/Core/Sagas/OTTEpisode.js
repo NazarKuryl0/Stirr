@@ -1,4 +1,4 @@
-import { put, call, takeLatest, all } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 
 import { getData } from '../Services/OTTEpisode';
 import * as actionTypes from '../Stores/OTTEpisode/Constants';
