@@ -1,8 +1,8 @@
-import { put, select, call, takeLatest } from 'redux-saga/effects';
+import { put, select, call, takeLatest, all } from 'redux-saga/effects';
 
 import * as actionTypes from '../Stores/Channels/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';
-import { getChannelsData } from '../Services/Channels';
+import { getChannelsData, getProgramsData } from '../Services/Channels';
 
 function* fetchChannelsList() {
   yield put({
@@ -10,7 +10,7 @@ function* fetchChannelsList() {
   });
   const store = yield select();
   const {
-    config: { channelsListURL },
+    config: { channelsListURL, programsDataURL },
     common: { station },
   } = store;
   if (!channelsListURL) {
@@ -35,10 +35,18 @@ function* fetchChannelsList() {
       const {
         data: { channel, categories },
       } = data;
+      const channelsDataWithPrograms = yield all(
+        channel.map((item) => {
+          return call(() => getProgramsData(`${programsDataURL}${item['display-name']}`, station));
+        })
+      );
+      const filteredChannelsDataWithPrograms = channelsDataWithPrograms.map((item) => {
+        return item.data;
+      });
       yield put({
         type: actionTypes.FETCH_CHANNELS_DATA_SUCCEEDED,
         payload: {
-          channel,
+          filteredChannelsDataWithPrograms,
           categories,
         },
       });

@@ -45,6 +45,9 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Montserrat-Bold',
   },
+  channelsWithProgramsBlock: {
+    flexDirection: 'row',
+  },
   channelBlock: {
     height: 95,
     width: 83,
@@ -62,5 +65,29 @@ export const styles = StyleSheet.create({
   channelIcon: {
     width: 50,
     height: 30,
+  },
+  programsBlock: {
+    flexDirection: 'column',
+  },
+  programsRowBlock: {
+    height: 95,
+    flexDirection: 'row',
+  },
+  programBlock: (duration) => {
+    return {
+      backgroundColor: 'grey',
+      borderBottomColor: '#000000',
+      borderBottomWidth: 2,
+      justifyContent: 'center',
+      borderRightColor: '#000000',
+      borderRightWidth: 2,
+      paddingHorizontal: 12,
+      width: duration,
+    };
+  },
+  program: {
+    fontSize: 15,
+    color: '#ffffff',
+    fontFamily: 'Montserrat-Medium',
   },
 });

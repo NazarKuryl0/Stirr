@@ -19,7 +19,7 @@ const channelsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: undefined,
-        channelsData: action.payload.channel,
+        channelsData: action.payload.filteredChannelsDataWithPrograms,
         categories: action.payload.categories,
       };
     case actionTypes.FETCH_CHANNELS_DATA_FAILED:

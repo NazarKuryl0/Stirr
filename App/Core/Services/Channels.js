@@ -7,3 +7,11 @@ export function getChannelsData(url, station) {
     },
   });
 }
+
+export function getProgramsData(url, station) {
+  return axios.get(url, {
+    params: {
+      station,
+    },
+  });
+}

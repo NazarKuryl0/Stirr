@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, TouchableOpacity, View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { fetchCitySelectionData } from '../../../Core/Stores/CitySelection/Actions';
 import { fetchChannelsData } from '../../../Core/Stores/Channels/Actions';
@@ -33,12 +34,12 @@ class OTTFeed extends Component {
       channelsToDisplay =
         activeCategory === 'All'
           ? channelsData
-          : channelsData.filter((channel) => {
-              const filteredChannels = channel.categories.filter(
+          : channelsData.filter((item) => {
+              const filteredChannels = item.channel[0].categories.filter(
                 (channelCategory) => channelCategory.uuid === activeCategory
               );
               if (filteredChannels.length) {
-                return channel;
+                return item;
               }
             });
     }
@@ -97,23 +98,57 @@ class OTTFeed extends Component {
             <View style={styles.timeBlock}>
               <Text style={styles.time}>TODAY</Text>
             </View>
-            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-              {channelsToDisplay.map((channel) => {
-                const {
-                  num,
-                  icon: { src },
-                } = channel;
-                return (
-                  <View style={styles.channelBlock}>
-                    <Text style={styles.channel}>{num}</Text>
-                    <Image
-                      resizeMethod="contain"
-                      source={{ uri: src }}
-                      style={styles.channelIcon}
-                    />
-                  </View>
-                );
-              })}
+            <ScrollView
+              bounces={false}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.channelsWithProgramsBlock}
+            >
+              <View>
+                {channelsToDisplay.map((item) => {
+                  const {
+                    num,
+                    icon: { src },
+                  } = item.channel[0];
+                  return (
+                    <View style={styles.channelBlock}>
+                      <Text style={styles.channel}>{num}</Text>
+                      <Image
+                        resizeMethod="contain"
+                        source={{ uri: src }}
+                        style={styles.channelIcon}
+                      />
+                    </View>
+                  );
+                })}
+              </View>
+              <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
+                <View style={styles.programsBlock}>
+                  {channelsToDisplay.map((item) => {
+                    return (
+                      <View style={styles.programsRowBlock}>
+                        {item.programme.map((programs) => {
+                          const {
+                            title: { value: name },
+                            stop,
+                            start,
+                          } = programs;
+                          const pStart = moment(start, 'YYYYMMDDhhmmss');
+                          const pStop = moment(stop, 'YYYYMMDDhhmmss');
+                          const programDurationInMinutes = pStop.diff(pStart, 'minute');
+                          const prgrmWidthBlock = (programDurationInMinutes * 275) / 30;
+                          return (
+                            <TouchableOpacity style={styles.programBlock(prgrmWidthBlock - 1)}>
+                              <Text numberOfLines={1} style={styles.program}>
+                                {name}
+                              </Text>
+                            </TouchableOpacity>
+                          );
+                        })}
+                      </View>
+                    );
+                  })}
+                </View>
+              </ScrollView>
             </ScrollView>
           </View>
         )}
