@@ -20,7 +20,7 @@ class OTTEpisode extends Component {
         </View>
         {data && (
           <View>
-            <VideoPlayer videoURL={data.videoURL} duration={data.duration}/>
+            <VideoPlayer videoURL={data.videoURL} duration={data.duration} />
             <View style={styles.mainBlock}>
               <Text style={styles.title}>{data.title}</Text>
               <View style={styles.subtitleBlock}>

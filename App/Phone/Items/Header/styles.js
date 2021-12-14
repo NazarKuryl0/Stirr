@@ -12,8 +12,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   burger: {
-    width: 20,
-    height: 20,
+    flex: 1,
+  },
+  stationBlock: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  station: {
+    color: '#ffffff',
+    fontSize: 17,
+    fontFamily: 'Montserrat-Medium',
   },
   defaultBlock: {
     width: 20,

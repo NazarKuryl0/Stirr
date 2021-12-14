@@ -20,7 +20,7 @@ export default class VideoPlayer extends Component {
 
   state = {
     currentTime: 0,
-    isPaused: false,
+    isPaused: true,
     isInFullScreen: false,
     isPortraitOrientation: this.isPortrait(),
     controlsAreActive: false,
@@ -58,7 +58,11 @@ export default class VideoPlayer extends Component {
   };
   toggleVideoPlay = () => {
     const { isPaused } = this.state;
-    this.setState({ isPaused: !isPaused });
+    this.setState({ controlsAreActive: true, isPaused: !isPaused });
+    clearTimeout(this.controlsTimerId);
+    this.controlsTimerId = setTimeout(() => {
+      this.setState({ controlsAreActive: false });
+    }, 5000);
   };
 
   render() {

@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   showTitleBlock: {
+    width: 248,
     marginTop: 16,
   },
   showTitle: {

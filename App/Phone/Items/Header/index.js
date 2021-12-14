@@ -32,12 +32,12 @@ export default class Header extends Component {
   };
   render() {
     const { isOpenBurger } = this.state;
-    const { renderBurger, renderSearch, logo, navData, activePage } = this.props;
+    const { renderBurger, renderSearch, station, logo, navData, activePage } = this.props;
     if (!isOpenBurger) {
       return (
         <View style={styles.root}>
           {renderBurger ? (
-            <TouchableOpacity onPress={this.handleBurgerPress}>
+            <TouchableOpacity style={styles.burger} onPress={this.handleBurgerPress}>
               <Image source={burger} />
             </TouchableOpacity>
           ) : (
@@ -46,6 +46,10 @@ export default class Header extends Component {
           <FastImage source={{ uri: logo }} resizeMode="contain" style={styles.logo} />
           {renderSearch ? (
             <View style={{ width: 20, height: 20, backgroundColor: 'green' }} />
+          ) : station ? (
+            <View style={styles.stationBlock}>
+              <Text style={styles.station}>{station}</Text>
+            </View>
           ) : (
             <View style={styles.defaultBlock} />
           )}

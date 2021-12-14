@@ -13,8 +13,20 @@ export default class CarouselTeaserList extends Component {
   state = {
     activeSlide: 0,
   };
-  handleItemPress = (link) => {
-    Navigator.navigate(link);
+  handleItemPress = (item) => {
+    const { fetchShowPageData, fetchOTTEpisodePageData, fetchSectionPageData } = this.props;
+    if (item.linkType === 'show') {
+      fetchShowPageData(item.link);
+      Navigator.navigate('ShowPage');
+    } else if (item.linkType === 'feed') {
+      Navigator.navigate('OTTFeed');
+    } else if (item.linkType === 'episode') {
+      fetchOTTEpisodePageData(item.link);
+      Navigator.navigate('OTTEpisode');
+    } else if (item.linkType === 'section') {
+      fetchSectionPageData(item.link);
+      Navigator.navigate('Section');
+    }
   };
   renderItem = (i) => {
     const {
@@ -26,7 +38,7 @@ export default class CarouselTeaserList extends Component {
     const title = item['media:content']['media:title'].content;
     const subtitle = item['media:content']['media:description'].content;
     return (
-      <TouchableOpacity onPress={this.handleItemPress.bind(this, item.category)}>
+      <TouchableOpacity onPress={this.handleItemPress.bind(this, item)}>
         <FastImage
           source={{ uri: imageURL, priority: FastImage.priority.high }}
           style={{ width: '100%', height: '100%', backgroundColor: colors[ind] }}

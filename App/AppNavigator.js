@@ -11,6 +11,7 @@ import {
   CitySelection as CitySelectionPhone,
   OTTSettings as OTTSettingsPhone,
   OTTText as OTTTextPhone,
+  OTTFeed as OTTFeedPhone,
 } from './Phone/Pages';
 
 let routeConfigMap;
@@ -26,6 +27,7 @@ if (Platform.isTVOS) {
     CitySelection: CitySelectionPhone,
     OTTSettings: OTTSettingsPhone,
     OTTText: OTTTextPhone,
+    OTTFeed: OTTFeedPhone,
   };
 }
 

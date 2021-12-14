@@ -72,7 +72,14 @@ class OTTPage extends Component {
                 );
               }
               case 'CAROUSEL_TEASER_LIST': {
-                return <CarouselTeaserList itemComponentData={componentsData[pageIndex]} />;
+                return (
+                  <CarouselTeaserList
+                    fetchShowPageData={fetchShowPageData}
+                    fetchSectionPageData={fetchSectionPageData}
+                    fetchOTTEpisodePageData={fetchOTTEpisodePageData}
+                    itemComponentData={componentsData[pageIndex]}
+                  />
+                );
               }
               case 'STANDARD_TEASER_LIST': {
                 return (
