@@ -10,4 +10,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  playerLoaderSizes: {
+    width: 30,
+    height: 30,
+  },
 });

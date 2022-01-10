@@ -33,6 +33,9 @@ export const styles = StyleSheet.create({
   activeCategory: {
     color: '#FFDA3A',
   },
+  timesBlock: {
+    flexDirection: 'row',
+  },
   timeBlock: {
     height: 57,
     width: 83,
@@ -56,6 +59,16 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 2,
     paddingVertical: 20,
     alignItems: 'center',
+  },
+  timelineBlock: {
+    height: 57,
+    width: 275,
+    justifyContent: 'center',
+  },
+  timelineText: {
+    color: '#ffffff',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 14,
   },
   channel: {
     fontSize: 18,

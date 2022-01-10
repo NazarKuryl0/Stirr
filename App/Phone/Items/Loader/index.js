@@ -30,7 +30,7 @@ export default class Loader extends Component {
     const { backgroundImageURL, loaderColor } = this.props;
     return (
       <View style={styles.root}>
-        <ImageBackground source={{uri: backgroundImageURL}} style={styles.mainBlock}>
+        <ImageBackground source={{ uri: backgroundImageURL }} style={styles.mainBlock}>
           <Animated.View
             style={{
               transform: [
@@ -43,7 +43,11 @@ export default class Loader extends Component {
               ],
             }}
           >
-            <Image source={loaderURL} style={{ tintColor: loaderColor }} />
+            <Image
+              resizeMode="contain"
+              source={loaderURL}
+              style={[{ tintColor: loaderColor }, !backgroundImageURL && styles.playerLoaderSizes]}
+            />
           </Animated.View>
         </ImageBackground>
       </View>

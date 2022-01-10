@@ -28,6 +28,9 @@ export default class Header extends Component {
     } else if (item.type === 'OTTSettings') {
       this.setState({ isOpenBurger: false });
       Navigator.navigate('OTTSettings', item);
+    } else if (item.type === 'OTTFeed') {
+      this.setState({ isOpenBurger: false });
+      Navigator.navigate('OTTFeed');
     }
   };
   render() {
@@ -45,7 +48,9 @@ export default class Header extends Component {
           )}
           <FastImage source={{ uri: logo }} resizeMode="contain" style={styles.logo} />
           {renderSearch ? (
-            <View style={{ width: 20, height: 20, backgroundColor: 'green' }} />
+            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+              <View style={{ width: 20, height: 20, backgroundColor: 'red' }} />
+            </View>
           ) : station ? (
             <View style={styles.stationBlock}>
               <Text style={styles.station}>{station}</Text>

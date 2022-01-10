@@ -9,6 +9,7 @@ import {
   ExitFullscreen,
   VideoPause,
 } from '../../../Assets/VideoPlayerIcons';
+import Loader from '../Loader';
 
 import { styles } from './styles';
 
@@ -24,6 +25,7 @@ export default class VideoPlayer extends Component {
     isInFullScreen: false,
     isPortraitOrientation: this.isPortrait(),
     controlsAreActive: false,
+    isLoading: false,
   };
 
   componentDidMount() {
@@ -64,11 +66,23 @@ export default class VideoPlayer extends Component {
       this.setState({ controlsAreActive: false });
     }, 5000);
   };
+  onLoadStart = () => {
+    this.setState({ isLoading: true });
+  };
+  onReadyForDisplay = () => {
+    this.setState({ isLoading: false });
+  };
 
   render() {
-    const { currentTime, isPaused, isInFullScreen, isPortraitOrientation, controlsAreActive } =
-      this.state;
-    const { videoURL, duration } = this.props;
+    const {
+      currentTime,
+      isPaused,
+      isInFullScreen,
+      isPortraitOrientation,
+      controlsAreActive,
+      isLoading,
+    } = this.state;
+    const { videoURL, duration, appStyles } = this.props;
     return (
       <View
         style={[
@@ -86,10 +100,17 @@ export default class VideoPlayer extends Component {
             style={styles.videoBlock}
             source={{ uri: videoURL }}
             onProgress={this.handleVideoProgress}
+            onLoadStart={this.onLoadStart}
+            onReadyForDisplay={this.onReadyForDisplay}
             paused={isPaused}
           />
+          {isLoading && (
+            <View style={styles.controlsBlock}>
+              <Loader loaderColor={appStyles.buttonStyles.active.backgroundColor} />
+            </View>
+          )}
         </TouchableOpacity>
-        {(controlsAreActive || isPaused) && (
+        {(controlsAreActive || isPaused) && !isLoading && (
           <View
             style={[styles.controlsBlock, isPortraitOrientation && styles.controlsBlockInPortrait]}
           >

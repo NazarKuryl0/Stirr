@@ -9,10 +9,8 @@ import { styles } from './styles';
 
 class OTTEpisode extends Component {
   render() {
-    const {
-      appStyles: { backgroundURL },
-      data,
-    } = this.props;
+    const { appStyles, data } = this.props;
+    const { backgroundURL } = appStyles;
     return (
       <View>
         <View style={styles.headerBlock}>
@@ -20,7 +18,7 @@ class OTTEpisode extends Component {
         </View>
         {data && (
           <View>
-            <VideoPlayer videoURL={data.videoURL} duration={data.duration} />
+            <VideoPlayer videoURL={data.videoURL} duration={data.duration} appStyles={appStyles} />
             <View style={styles.mainBlock}>
               <Text style={styles.title}>{data.title}</Text>
               <View style={styles.subtitleBlock}>

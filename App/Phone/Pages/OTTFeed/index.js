@@ -5,9 +5,14 @@ import moment from 'moment';
 
 import { fetchCitySelectionData } from '../../../Core/Stores/CitySelection/Actions';
 import { fetchChannelsData } from '../../../Core/Stores/Channels/Actions';
-import { Header } from '../../Items';
+import { tripleTimeScheduleGradientColors, programsGradientColors } from '../../../Core/Constants';
+import { Header, Gradient, VideoPlayer } from '../../Items';
 
 import { styles } from './styles';
+
+let timelineBlocks = [];
+let startTimeConst;
+
 class OTTFeed extends Component {
   state = {
     activeCategory: 'All',
@@ -19,16 +24,41 @@ class OTTFeed extends Component {
   handleCategoryPress = (name) => {
     this.setState({ activeCategory: name });
   };
+
+  startTime = () => {
+    if (!startTimeConst) {
+      const time = moment().subtract('03:00:00');
+      const remainder = 30 - (time.minute() % 30);
+
+      startTimeConst = time.subtract(30 - remainder, 'minutes').seconds(0);
+    }
+
+    return startTimeConst;
+  };
+
+  handleProgramsScroll = (e) => {
+    if (!this.timeBarScrolling) {
+      this.ProgramsScrolling = true;
+      let scrollX = e.nativeEvent.contentOffset.x;
+      this.timeScrollRef.scrollTo({ x: scrollX, animated: false });
+    }
+    this.timeBarScrolling = false;
+  };
+
+  handleTimeBarScroll = (e) => {
+    if (!this.ProgramsScrolling) {
+      this.timeBarScrolling = true;
+      let scrollX = e.nativeEvent.contentOffset.x;
+      this.programsScrollRef.scrollTo({ x: scrollX, animated: false });
+    }
+    this.ProgramsScrolling = false;
+  };
+
   render() {
     const { activeCategory } = this.state;
-    const {
-      appStyles: { logo },
-      navData,
-      station,
-      fetchCitySelectionData,
-      channelsData,
-      categories,
-    } = this.props;
+    const { appStyles, navData, station, fetchCitySelectionData, channelsData, categories } =
+      this.props;
+    const { logo } = appStyles;
     let channelsToDisplay;
     if (channelsData) {
       channelsToDisplay =
@@ -42,6 +72,21 @@ class OTTFeed extends Component {
                 return item;
               }
             });
+      channelsToDisplay = channelsToDisplay.filter((i, index) => index < 10);
+    }
+    if (!timelineBlocks.length) {
+      for (let i = 0; i < 49; ++i) {
+        const blockTime = this.startTime()
+          .clone()
+          .add(30 * i, 'minutes');
+
+        timelineBlocks = [
+          ...timelineBlocks,
+          {
+            humanReadableTime: blockTime.format('h:mm A'),
+          },
+        ];
+      }
     }
     return (
       <View style={styles.root}>
@@ -52,6 +97,11 @@ class OTTFeed extends Component {
           navData={navData}
           activePage="CHANNELS"
           fetchCitySelectionData={fetchCitySelectionData}
+        />
+        <VideoPlayer
+          appStyles={appStyles}
+          videoURL="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          duration={2000}
         />
         {!!channelsToDisplay && !!categories && (
           <View>
@@ -94,9 +144,43 @@ class OTTFeed extends Component {
                 );
               })}
             </ScrollView>
-
-            <View style={styles.timeBlock}>
-              <Text style={styles.time}>TODAY</Text>
+            <View style={styles.timesBlock}>
+              <View style={styles.timeBlock}>
+                <Gradient
+                  width={styles.timeBlock.width}
+                  height={styles.timeBlock.height}
+                  startColor={tripleTimeScheduleGradientColors.start}
+                  endColor={tripleTimeScheduleGradientColors.midle}
+                />
+                <Text style={styles.time}>TODAY</Text>
+              </View>
+              <View>
+                <Gradient
+                  width="100%"
+                  height={styles.timeBlock.height}
+                  startColor={tripleTimeScheduleGradientColors.midle}
+                  endColor={tripleTimeScheduleGradientColors.end}
+                />
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  bounces={false}
+                  ref={(ref) => (this.timeScrollRef = ref)}
+                  onScroll={this.handleTimeBarScroll}
+                  scrollEventThrottle={16}
+                >
+                  {!!timelineBlocks.length &&
+                    timelineBlocks.map((time, timeIndex) => (
+                      <View style={styles.timelineBlock}>
+                        <Text style={[styles.timelineText, timeIndex && { marginLeft: -65 }]}>
+                          {!timeIndex
+                            ? time.humanReadableTime
+                            : `Up next ${time.humanReadableTime}`}
+                        </Text>
+                      </View>
+                    ))}
+                </ScrollView>
+              </View>
             </View>
             <ScrollView
               bounces={false}
@@ -121,23 +205,39 @@ class OTTFeed extends Component {
                   );
                 })}
               </View>
-              <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
+              <ScrollView
+                horizontal
+                bounces={false}
+                showsHorizontalScrollIndicator={false}
+                ref={(ref) => (this.programsScrollRef = ref)}
+                scrollEventThrottle={16}
+                onScroll={this.handleProgramsScroll}
+                contentOffset={{ x: this.state.offset }}
+              >
                 <View style={styles.programsBlock}>
                   {channelsToDisplay.map((item) => {
                     return (
                       <View style={styles.programsRowBlock}>
-                        {item.programme.map((programs) => {
+                        {item.programme.map((program, programIndex) => {
                           const {
                             title: { value: name },
                             stop,
                             start,
-                          } = programs;
+                          } = program;
                           const pStart = moment(start, 'YYYYMMDDhhmmss');
                           const pStop = moment(stop, 'YYYYMMDDhhmmss');
                           const programDurationInMinutes = pStop.diff(pStart, 'minute');
                           const prgrmWidthBlock = (programDurationInMinutes * 275) / 30;
                           return (
                             <TouchableOpacity style={styles.programBlock(prgrmWidthBlock - 1)}>
+                              {!programIndex && (
+                                <Gradient
+                                  width={styles.programBlock(prgrmWidthBlock - 1).width}
+                                  height={styles.programsRowBlock.height - 2}
+                                  startColor={programsGradientColors.start}
+                                  endColor={programsGradientColors.end}
+                                />
+                              )}
                               <Text numberOfLines={1} style={styles.program}>
                                 {name}
                               </Text>

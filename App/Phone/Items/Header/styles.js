@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     height: 17,
   },
   logo: {
-    width: 100,
+    flex: 1,
     height: 37,
   },
   modalBlock: {
