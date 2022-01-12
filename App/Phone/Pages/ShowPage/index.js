@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 
 import Navigator from '../../../Core/Services/NavigationService';
+import { fetchOTTEpisodePageData } from '../../../Core/Stores/OTTEpisode/Actions';
 import { BackButton, Background } from '../../Items';
 
 import { styles } from './styles';
@@ -17,7 +18,9 @@ class ShowPage extends Component {
   };
   handleEpisodePress = (episode) => {
     const { item } = episode;
+    const { fetchOTTEpisodePageData } = this.props;
     if (item.linkType === 'episode') {
+      fetchOTTEpisodePageData(item.link);
       Navigator.navigate('OTTEpisode');
     }
   };
@@ -79,10 +82,14 @@ class ShowPage extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchOTTEpisodePageData: (url) => dispatch(fetchOTTEpisodePageData(url)),
+});
+
 const mapStateToProps = ({ config: { appStyles }, ShowPage: { showData, seasonsData } }) => ({
   appStyles,
   showData,
   seasonsData,
 });
 
-export default connect(mapStateToProps, null)(ShowPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

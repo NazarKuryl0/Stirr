@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Dimensions } from 'react-native';
-import Video from 'react-native-video';
+import { View, TouchableOpacity, Dimensions, Platform } from 'react-native';
+import Video, { DRMType } from 'react-native-video';
 
 import { WIDTH } from '../../../Core/Constants';
 import {
@@ -82,7 +82,38 @@ export default class VideoPlayer extends Component {
       controlsAreActive,
       isLoading,
     } = this.state;
-    const { videoURL, duration, appStyles } = this.props;
+    const { videoURL, duration, appStyles, drm } = this.props;
+    let videoURLToDisplay = videoURL;
+    let drmInfo = {};
+    if (drm && Object.keys(drm).length) {
+      if (Platform.OS === 'ios') {
+        videoURLToDisplay = drm.url;
+        drmInfo.type = DRMType.FAIRPLAY;
+        drmInfo.certificateUrl = drm.FPcert;
+        drmInfo.getLicense = (spcString, _contentId) => {
+          return fetch(drm.FPserver, {
+            method: 'POST',
+            headers: {
+              customdata: drm.AuthXML,
+            },
+            body: `spc=${spcString}&assetId=${_contentId}`,
+          })
+            .then((response) => response.text())
+            .then((response) => response)
+            .catch((error) => {
+              videoURLToDisplay = drm.drmfail;
+              console.error('Error ', error);
+            });
+        };
+      } else {
+        videoURLToDisplay = drm.dashUrl;
+        drmInfo.type = DRMType.WIDEVINE;
+        drmInfo.licenseServer = drm.WVserver;
+        drmInfo.headers = {
+          customdata: drm.AuthXML,
+        };
+      }
+    }
     return (
       <View
         style={[
@@ -98,11 +129,12 @@ export default class VideoPlayer extends Component {
             controls={false}
             ref={(ref) => (this.videoPlayer = ref)}
             style={styles.videoBlock}
-            source={{ uri: videoURL }}
+            source={{ uri: videoURLToDisplay }}
             onProgress={this.handleVideoProgress}
             onLoadStart={this.onLoadStart}
             onReadyForDisplay={this.onReadyForDisplay}
             paused={isPaused}
+            drm={drmInfo}
           />
           {isLoading && (
             <View style={styles.controlsBlock}>

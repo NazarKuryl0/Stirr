@@ -31,6 +31,8 @@ export default class Header extends Component {
     } else if (item.type === 'OTTFeed') {
       this.setState({ isOpenBurger: false });
       Navigator.navigate('OTTFeed');
+    } else if (item.title === 'HOME' && activePage === 'CHANNELS') {
+      Navigator.goBack();
     }
   };
   render() {
