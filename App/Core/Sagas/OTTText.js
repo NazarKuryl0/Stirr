@@ -1,5 +1,5 @@
-import { put, call, takeLatest, all } from 'redux-saga/effects';
-import { getData } from '../Services/OTTText';
+import { put, call, takeLatest } from 'redux-saga/effects';
+import { getData } from '../Services';
 
 import * as actionTypes from '../Stores/OTTText/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';

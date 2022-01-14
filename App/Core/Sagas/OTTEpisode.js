@@ -1,6 +1,6 @@
 import { put, call, takeLatest, select } from 'redux-saga/effects';
 
-import { getData, getDRMAccesses, getDRMFailPlayback } from '../Services/OTTEpisode';
+import { getData, getDRMAccesses, getDRMFailPlayback } from '../Services';
 import * as actionTypes from '../Stores/OTTEpisode/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';
 

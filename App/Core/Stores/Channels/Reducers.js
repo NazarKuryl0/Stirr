@@ -4,6 +4,7 @@ const initialState = {
   error: undefined,
   channelsData: undefined,
   categories: undefined,
+  selectedProgram: undefined,
 };
 
 const channelsReducer = (state = initialState, action) => {
@@ -28,6 +29,24 @@ const channelsReducer = (state = initialState, action) => {
         error: action.error,
         channelsData: undefined,
         categories: undefined,
+      };
+    case actionTypes.SET_SELECTED_PROGRAM:
+      return {
+        ...state,
+        error: action.error,
+        selectedProgram: undefined,
+      };
+    case actionTypes.SET_SELECTED_PROGRAM_FAILED:
+      return {
+        ...state,
+        error: action.error,
+        selectedProgram: undefined,
+      };
+    case actionTypes.SET_SELECTED_PROGRAM_SUCCEEDED:
+      return {
+        ...state,
+        error: undefined,
+        selectedProgram: action.payload.selectedProgram,
       };
     default:
       return state;

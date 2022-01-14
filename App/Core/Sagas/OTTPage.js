@@ -3,18 +3,14 @@ import { put, call, takeLatest, all } from 'redux-saga/effects';
 import * as actionTypes from '../Stores/OTTPage/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';
 import { SET_STATION } from '../Stores/Common/Constants';
-import {
-  getStationAutoSelectionData,
-  getOTTPageData,
-  getOTTPageComponentData,
-} from '../Services/OTTPage';
+import { getData, getDataWithStation } from '../Services';
 
 function* fetchStationAutoSelectionData(d) {
   yield put({
     type: commonActionTypes.SHOW_LOADER,
   });
   const { url } = d;
-  const data = yield call(() => getStationAutoSelectionData(url));
+  const data = yield call(() => getData(url));
   if (data.status !== 200) {
     yield put({
       type: actionTypes.FETCH_STATION_AUTO_SELECTION_DATA_FAILED,
@@ -52,7 +48,7 @@ function* fetchOTTPageData(d) {
     type: commonActionTypes.SHOW_LOADER,
   });
   const { url, station } = d;
-  const data = yield call(() => getOTTPageData(url, station));
+  const data = yield call(() => getDataWithStation(url, station));
   if (data.status !== 200) {
     yield put({
       type: actionTypes.FETCH_OTTPAGE_DATA_FAILED,
@@ -67,7 +63,7 @@ function* fetchOTTPageData(d) {
     } = data;
     const componentData = yield all(
       page.map((item) => {
-        return call(() => getOTTPageComponentData(item.content, station));
+        return call(() => getDataWithStation(item.content, station));
       })
     );
     let filteredComponentData = [];

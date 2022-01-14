@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+export function getDataWithStation(url, station) {
+  return axios.get(url, {
+    params: {
+      station,
+    },
+  });
+}
+
 export function getData(url) {
   return axios.get(url);
 }

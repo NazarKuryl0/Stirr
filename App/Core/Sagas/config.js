@@ -2,7 +2,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 
 import * as actionTypes from '../Stores/Config/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';
-import { getData } from '../Services/ConfigServices';
+import { getData } from '../Services';
 import { converterToRGBA } from '../Services/Helpers';
 
 function* fetchConfig() {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import { fetchCitySelectionData } from '../../../Core/Stores/CitySelection/Actions';
-import { fetchChannelsData } from '../../../Core/Stores/Channels/Actions';
+import { fetchChannelsData, setSelectedProgram } from '../../../Core/Stores/Channels/Actions';
 import { tripleTimeScheduleGradientColors, programsGradientColors } from '../../../Core/Constants';
 import { Header, Gradient, VideoPlayer } from '../../Items';
 
@@ -54,13 +54,25 @@ class OTTFeed extends Component {
     this.ProgramsScrolling = false;
   };
 
+  handleProgramPress = (item) => {
+    const { setSelectedProgram } = this.props;
+    setSelectedProgram(item[0], item[1]);
+  };
+
   render() {
     const { activeCategory } = this.state;
-    const { appStyles, navData, station, fetchCitySelectionData, channelsData, categories } =
-      this.props;
+    const {
+      appStyles,
+      navData,
+      station,
+      fetchCitySelectionData,
+      channelsData,
+      categories,
+      selectedProgram,
+    } = this.props;
     const { logo } = appStyles;
     let channelsToDisplay;
-    if (channelsData) {
+    if (channelsData && selectedProgram) {
       channelsToDisplay =
         activeCategory === 'All'
           ? channelsData
@@ -73,6 +85,9 @@ class OTTFeed extends Component {
               }
             });
       channelsToDisplay = channelsToDisplay.filter((i, index) => index < 10);
+      channelsToDisplay = channelsToDisplay.filter(
+        (i, index) => i.channel[0]['display-name'] !== selectedProgram.channel['display-name']
+      );
     }
     if (!timelineBlocks.length) {
       for (let i = 0; i < 49; ++i) {
@@ -98,11 +113,40 @@ class OTTFeed extends Component {
           activePage="CHANNELS"
           fetchCitySelectionData={fetchCitySelectionData}
         />
-        <VideoPlayer
-          appStyles={appStyles}
-          videoURL="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          duration={2000}
-        />
+        {!!selectedProgram && (
+          <View>
+            <VideoPlayer
+              appStyles={appStyles}
+              videoURL={selectedProgram.program.item.link}
+              drm={selectedProgram.drm}
+              isProgram={true}
+              duration={selectedProgram.programDuration}
+            />
+            <View style={styles.selectedProgramBlock}>
+              <View style={styles.selectedProgramChannelBlock}>
+                <Text style={styles.channel}>{selectedProgram.channel.num}</Text>
+                <Image
+                  resizeMethod="contain"
+                  source={{ uri: selectedProgram.channel.icon.src }}
+                  style={styles.channelIcon}
+                />
+              </View>
+              <View style={styles.selectedProgramDescriptionBlock}>
+                <View style={styles.selectedProgramDescriptionBlockFirstLine}>
+                  {selectedProgram.program.item['media:content']['sinclair:isLive'] === 'true' && (
+                    <View style={styles.liveBlock}>
+                      <Text style={styles.live}>LIVE</Text>
+                    </View>
+                  )}
+                  <Text style={styles.nowPlaying}>Now Playing</Text>
+                </View>
+                <Text style={styles.selectedProgramTitle}>
+                  {selectedProgram.program.item['media:content']['media:title'].content}
+                </Text>
+              </View>
+            </View>
+          </View>
+        )}
         {!!channelsToDisplay && !!categories && (
           <View>
             <ScrollView
@@ -228,8 +272,15 @@ class OTTFeed extends Component {
                           const pStop = moment(stop, 'YYYYMMDDhhmmss');
                           const programDurationInMinutes = pStop.diff(pStart, 'minute');
                           const prgrmWidthBlock = (programDurationInMinutes * 275) / 30;
+                          const Container = !programIndex ? TouchableOpacity : View;
                           return (
-                            <TouchableOpacity style={styles.programBlock(prgrmWidthBlock - 1)}>
+                            <Container
+                              onPress={this.handleProgramPress.bind(this, [
+                                item.channel[0],
+                                (pStop - pStart) / 1000,
+                              ])}
+                              style={styles.programBlock(prgrmWidthBlock - 1)}
+                            >
                               {!programIndex && (
                                 <Gradient
                                   width={styles.programBlock(prgrmWidthBlock - 1).width}
@@ -241,7 +292,7 @@ class OTTFeed extends Component {
                               <Text numberOfLines={1} style={styles.program}>
                                 {name}
                               </Text>
-                            </TouchableOpacity>
+                            </Container>
                           );
                         })}
                       </View>
@@ -260,18 +311,20 @@ class OTTFeed extends Component {
 const mapStateToProps = ({
   config: { navData, appStyles },
   common: { station },
-  Channels: { channelsData, categories },
+  Channels: { channelsData, categories, selectedProgram },
 }) => ({
   navData,
   appStyles,
   station,
   channelsData,
   categories,
+  selectedProgram,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCitySelectionData: (url) => dispatch(fetchCitySelectionData(url)),
   fetchChannelsData: () => dispatch(fetchChannelsData()),
+  setSelectedProgram: (data, duration) => dispatch(setSelectedProgram(data, duration)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OTTFeed);

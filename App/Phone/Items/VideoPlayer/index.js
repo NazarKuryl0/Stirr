@@ -21,7 +21,7 @@ export default class VideoPlayer extends Component {
 
   state = {
     currentTime: 0,
-    isPaused: true,
+    isPaused: !this.props.isProgram,
     isInFullScreen: false,
     isPortraitOrientation: this.isPortrait(),
     controlsAreActive: false,
@@ -82,7 +82,7 @@ export default class VideoPlayer extends Component {
       controlsAreActive,
       isLoading,
     } = this.state;
-    const { videoURL, duration, appStyles, drm } = this.props;
+    const { videoURL, duration, appStyles, drm, isProgram } = this.props;
     let videoURLToDisplay = videoURL;
     let drmInfo = {};
     if (drm && Object.keys(drm).length) {
@@ -114,6 +114,7 @@ export default class VideoPlayer extends Component {
         };
       }
     }
+    const ProgressBarContainer = isProgram ? View : TouchableOpacity;
     return (
       <View
         style={[
@@ -156,7 +157,7 @@ export default class VideoPlayer extends Component {
                 </TouchableOpacity>
               )}
             </View>
-            <TouchableOpacity
+            <ProgressBarContainer
               onPress={this.handleProgressbarPress}
               style={[
                 styles.progressbarBlock,
@@ -166,7 +167,7 @@ export default class VideoPlayer extends Component {
               <View
                 style={[styles.passedTimeBlock, { width: `${(currentTime * 100) / duration}%` }]}
               />
-            </TouchableOpacity>
+            </ProgressBarContainer>
           </View>
         )}
       </View>

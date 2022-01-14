@@ -1,5 +1,5 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects';
-import { getData } from '../Services/ShowPage';
+import { getData } from '../Services';
 
 import * as actionTypes from '../Stores/ShowPage/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';

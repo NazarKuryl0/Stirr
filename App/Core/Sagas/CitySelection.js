@@ -1,5 +1,5 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects';
-import { getData } from '../Services/CitySelection';
+import { getData } from '../Services';
 
 import * as actionTypes from '../Stores/CitySelection/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';

@@ -5,6 +5,46 @@ export const styles = StyleSheet.create({
     flex: 1,
     minHeight: '100%',
   },
+  selectedProgramBlock: {
+    width: '100%',
+    height: 83,
+    backgroundColor: '#0E1F2F',
+    flexDirection: 'row',
+  },
+  selectedProgramChannelBlock: {
+    width: 83,
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectedProgramDescriptionBlock: {
+    paddingVertical: 9,
+    justifyContent: 'center',
+  },
+  selectedProgramDescriptionBlockFirstLine: {
+    flexDirection: 'row',
+  },
+  liveBlock: {
+    backgroundColor: '#FFDE22',
+    height: 20,
+    paddingHorizontal: 3,
+    marginRight: 8,
+  },
+  live: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 14,
+  },
+  nowPlaying: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 14,
+    color: '#FFDE22',
+  },
+  selectedProgramTitle: {
+    fontSize: 17,
+    lineHeight: 24,
+    fontFamily: 'Montserrat-Bold',
+    color: '#ffffff',
+  },
   categoriesBlock: {
     height: 85,
     backgroundColor: '#000000',
