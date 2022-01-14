@@ -19,7 +19,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^12.1.1",
-    "react-native-video": "^5.2.0",
+    "react-native-video": "file:modules/react-native-video",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
     "react-redux": "^7.2.6",

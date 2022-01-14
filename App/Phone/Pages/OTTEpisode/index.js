@@ -24,6 +24,7 @@ class OTTEpisode extends Component {
               videoURL={data.videoURL}
               duration={data.duration}
               appStyles={appStyles}
+              adTagUrl={data.adUrl}
             />
             <View style={styles.mainBlock}>
               <Text style={styles.title}>{data.title}</Text>

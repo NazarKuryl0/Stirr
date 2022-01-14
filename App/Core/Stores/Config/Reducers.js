@@ -6,6 +6,8 @@ const initialState = {
   appStyles: undefined,
   channelsListURL: undefined,
   programsDataURL: undefined,
+  vmap_generator: undefined,
+  cust_params_extras: undefined,
   error: undefined,
 };
 
@@ -20,6 +22,8 @@ const configReducer = (state = initialState, action) => {
         appStyles: undefined,
         channelsListURL: undefined,
         programsDataURL: undefined,
+        vmap_generator: undefined,
+        cust_params_extras: undefined,
       };
     case actionTypes.FETCH_CONFIG_SUCCEEDED:
       return {
@@ -30,6 +34,8 @@ const configReducer = (state = initialState, action) => {
         appStyles: action.payload.appStyles,
         channelsListURL: action.payload.channelsListURL,
         programsDataURL: action.payload.programsDataURL,
+        vmap_generator: action.payload.vmap_generator,
+        cust_params_extras: action.payload.cust_params_extras,
       };
     case actionTypes.FETCH_CONFIG_FAILED:
       return {
@@ -39,6 +45,8 @@ const configReducer = (state = initialState, action) => {
         appStyles: undefined,
         channelsListURL: undefined,
         programsDataURL: undefined,
+        vmap_generator: undefined,
+        cust_params_extras: undefined,
         error: action.error,
       };
     default:

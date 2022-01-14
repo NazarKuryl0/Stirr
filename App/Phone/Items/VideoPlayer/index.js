@@ -82,7 +82,7 @@ export default class VideoPlayer extends Component {
       controlsAreActive,
       isLoading,
     } = this.state;
-    const { videoURL, duration, appStyles, drm, isProgram } = this.props;
+    const { videoURL, duration, appStyles, drm, isProgram, adTagUrl } = this.props;
     let videoURLToDisplay = videoURL;
     let drmInfo = {};
     if (drm && Object.keys(drm).length) {
@@ -130,12 +130,15 @@ export default class VideoPlayer extends Component {
             controls={false}
             ref={(ref) => (this.videoPlayer = ref)}
             style={styles.videoBlock}
-            source={{ uri: videoURLToDisplay }}
+            source={{
+              uri: videoURLToDisplay,
+            }}
             onProgress={this.handleVideoProgress}
             onLoadStart={this.onLoadStart}
             onReadyForDisplay={this.onReadyForDisplay}
             paused={isPaused}
             drm={drmInfo}
+            adTagUrl={adTagUrl}
           />
           {isLoading && (
             <View style={styles.controlsBlock}>

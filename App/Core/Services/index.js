@@ -52,3 +52,17 @@ export async function getDRMFailPlayback(url, station, body) {
 
   return failUrl;
 }
+
+export async function getExtraAdParams(url, station) {
+  const {
+    data: { cust_params },
+  } = await axios.get(url, {
+    params: {
+      station,
+    },
+  });
+
+  return {
+    ...cust_params,
+  };
+}
