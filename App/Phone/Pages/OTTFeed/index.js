@@ -121,6 +121,7 @@ class OTTFeed extends Component {
               drm={selectedProgram.drm}
               isProgram={true}
               duration={selectedProgram.programDuration}
+              adTagUrl={selectedProgram.adUrl}
             />
             <View style={styles.selectedProgramBlock}>
               <View style={styles.selectedProgramChannelBlock}>

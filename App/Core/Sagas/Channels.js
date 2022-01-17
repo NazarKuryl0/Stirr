@@ -2,7 +2,12 @@ import { put, select, call, takeLatest, all } from 'redux-saga/effects';
 
 import * as actionTypes from '../Stores/Channels/Constants';
 import * as commonActionTypes from '../Stores/Common/Constants';
-import { getDataWithStation, getDRMAccesses, getDRMFailPlayback } from '../Services';
+import {
+  getDataWithStation,
+  getDRMAccesses,
+  getDRMFailPlayback,
+  getExtraAdParams,
+} from '../Services';
 
 function* fetchChannelsList() {
   yield put({
@@ -103,6 +108,7 @@ function* setSelectedProgram(item) {
     const store = yield select();
     const {
       common: { station },
+      config: { cust_params_extras, vmap_generator },
     } = store;
     const filteredProgramData = programData.data.rss.channel;
     if (
@@ -129,12 +135,56 @@ function* setSelectedProgram(item) {
         );
       }
     }
+
+    let adUrl = '';
+    if (
+      filteredProgramData.item['media:content']['sinclair:ad_preroll'] ||
+      filteredProgramData.item['media:content']['sinclair:ad_midroll'] ||
+      filteredProgramData.item['media:content']['sinclair:ad_postroll']
+    ) {
+      const extraAdParams = yield call(() => getExtraAdParams(cust_params_extras, station));
+
+      const adParams = {
+        ...extraAdParams,
+      };
+
+      let adParamsString = '';
+      let standParams = '';
+
+      for (const [key, value] of Object.entries(adParams)) {
+        if (key !== 'pmnd' && key !== 'pmxd') {
+          adParamsString += `${key}${value ? `=${value}` : ''}&`;
+        }
+      }
+      adUrl += `${vmap_generator}?`;
+
+      filteredProgramData.item['media:content']['sinclair:ad_preroll'] &&
+        (adUrl += `preroll=${encodeURIComponent(
+          filteredProgramData.item['media:content']['sinclair:ad_preroll']
+        )}&`);
+      filteredProgramData.item['media:content']['sinclair:ad_midroll'] &&
+        (adUrl += `midroll=${encodeURIComponent(
+          filteredProgramData.item['media:content']['sinclair:ad_midroll']['content']
+        )}&`);
+      filteredProgramData.item['media:content']['sinclair:ad_postroll'] &&
+        (adUrl += `postroll=${encodeURIComponent(
+          filteredProgramData.item['media:content']['sinclair:ad_postroll']
+        )}&`);
+      if (filteredProgramData.item['media:content']['sinclair:ad_midroll']) {
+        adUrl += `breaks=${filteredProgramData.item['media:content']['sinclair:ad_midroll']['breaks']}&`;
+      }
+
+      adUrl += `${standParams}cust_params=${encodeURIComponent(adParamsString)}`;
+    } else {
+      console.log('Playback without ads');
+    }
     const selectedProgram = {
       program: filteredProgramData,
       channel: item.program,
       programDuration: item.duration,
       drm,
       drmFailUrl,
+      adUrl,
     };
     yield put({
       type: actionTypes.SET_SELECTED_PROGRAM_SUCCEEDED,

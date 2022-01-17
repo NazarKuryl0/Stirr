@@ -50,7 +50,6 @@ function* fetchOTTEpisodePageData(d) {
     }
 
     let adUrl = '';
-    let midrollBreaks = [];
     if (
       OTTEpisodeData['media:content']['sinclair:ad_preroll'] ||
       OTTEpisodeData['media:content']['sinclair:ad_midroll'] ||
@@ -86,11 +85,6 @@ function* fetchOTTEpisodePageData(d) {
         )}&`);
       if (OTTEpisodeData['media:content']['sinclair:ad_midroll']) {
         adUrl += `breaks=${OTTEpisodeData['media:content']['sinclair:ad_midroll']['breaks']}&`;
-        midrollBreaks = OTTEpisodeData['media:content']['sinclair:ad_midroll']['breaks']
-          .split(',')
-          .map(
-            (breakString) => parseInt(breakString, 10) * 1000 // converting to milliseconds
-          );
       }
 
       adUrl += `${standParams}cust_params=${encodeURIComponent(adParamsString)}`;
@@ -106,7 +100,6 @@ function* fetchOTTEpisodePageData(d) {
       drm,
       drmFailUrl,
       adUrl,
-      midrollBreaks,
     };
     yield put({
       type: actionTypes.FETCH_OTTEPISODE_PAGE_DATA_SUCCESS,
