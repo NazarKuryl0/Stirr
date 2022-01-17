@@ -17,13 +17,19 @@ const OTTSearchPageReducer = (state = initialState, action) => {
       return {
         ...state,
         error: undefined,
-        suggestionsList: action.payload.filteredSuggestionsListData,
+        suggestionsList: action.payload.filteredSuggestionsListDataWithComponentsData,
       };
     case actionTypes.GET_SUGGESTIONS_LIST_FAILED:
       return {
         ...state,
         suggestionsList: undefined,
         error: action.error,
+      };
+    case actionTypes.CLEAR_SUGGESTIONS_LIST:
+      return {
+        ...state,
+        suggestionsList: undefined,
+        error: undefined,
       };
     default:
       return state;

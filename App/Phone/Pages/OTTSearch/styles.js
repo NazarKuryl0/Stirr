@@ -6,22 +6,39 @@ export const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  mainBlock: {
+  headerBlock: {
+    paddingTop: 60,
+    paddingBottom: 10,
     paddingHorizontal: 20,
-    paddingTop: 70,
-  },
-  searchLine: {
+    backgroundColor: '#000000',
     flexDirection: 'row',
     alignItems: 'center',
   },
+  inputRow: {
+    padding: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    borderRadius: 10,
+    marginRight: 20,
+  },
+  clearIconBlock: {
+    height: 16,
+    width: 16,
+  },
   input: {
-    width: WIDTH - 40 - 20 - 10, //40 is from mainBlock.paddingHorizontal, 20 from search icon size, 10 from innput marginRight
-    height: 30,
+    //40 - headerBlock.paddingHorizontal, 12 - inputRow.padding, 20 - search icon width, 15 - cancel icon, 20 - inputRow.marginRight, 60 - Cancel text
+    width: WIDTH - 40 - 12 - 20 - 15 - 20 - 60,
+    height: '100%',
     color: '#ffffff',
-    paddingHorizontal: 10,
+    paddingHorizontal: 6,
     fontFamily: 'Montserrat-Medium',
-    borderBottomWidth: 2,
-    borderBottomColor: '#000000',
+    borderRadius: 6,
     marginRight: 10,
+  },
+  cancel: {
+    fontFamily: 'Montserrat-Regular',
+    color: '#ffffff',
+    fontSize: 14,
   },
 });

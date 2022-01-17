@@ -40,10 +40,25 @@ function* getSuggestionsList(d) {
         }
       });
     });
+    const componentsData = yield all(
+      Object.keys(filteredSuggestionsListData).map((key) => {
+        return all(
+          filteredSuggestionsListData[key].map((link) => {
+            return call(() => getData(link));
+          })
+        );
+      })
+    );
+    let filteredSuggestionsListDataWithComponentsData = {};
+    Object.keys(filteredSuggestionsListData).map((key, index) => {
+      filteredSuggestionsListDataWithComponentsData[`${key}`] = componentsData[index].map(
+        (item) => item.data.rss.channel.pagecomponent.component[0]
+      );
+    });
     yield put({
       type: actionTypes.GET_SUGGESTIONS_LIST_SUCCESS,
       payload: {
-        filteredSuggestionsListData,
+        filteredSuggestionsListDataWithComponentsData,
       },
     });
     yield put({
