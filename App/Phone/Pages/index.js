@@ -1,21 +1,23 @@
-import OTTEpisode from './OTTEpisode';
-import OTTPage from './OTTPage';
-import OTTFeed from './OTTFeed';
-import WelcomePage from './WelcomePage';
-import SectionPage from './SectionPage';
-import ShowPage from './ShowPage';
-import CitySelection from './CitySelection';
-import OTTSettings from './OTTSettings';
-import OTTText from './OTTText';
+import OTTEpisodePhone from './OTTEpisode';
+import OTTPagePhone from './OTTPage';
+import OTTFeedPhone from './OTTFeed';
+import WelcomePagePhone from './WelcomePage';
+import SectionPagePhone from './SectionPage';
+import ShowPagePhone from './ShowPage';
+import CitySelectionPhone from './CitySelection';
+import OTTSettingsPhone from './OTTSettings';
+import OTTTextPhone from './OTTText';
+import OTTSearchPhone from './OTTSearch';
 
 export {
-  OTTEpisode,
-  OTTPage,
-  OTTFeed,
-  WelcomePage,
-  SectionPage,
-  ShowPage,
-  CitySelection,
-  OTTSettings,
-  OTTText,
+  OTTEpisodePhone,
+  OTTPagePhone,
+  OTTFeedPhone,
+  WelcomePagePhone,
+  SectionPagePhone,
+  ShowPagePhone,
+  CitySelectionPhone,
+  OTTSettingsPhone,
+  OTTTextPhone,
+  OTTSearchPhone,
 };

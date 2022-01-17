@@ -23,6 +23,10 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: 'Montserrat-Medium',
   },
+  searchBlock: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
   defaultBlock: {
     width: 20,
     height: 17,

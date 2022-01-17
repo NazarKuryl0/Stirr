@@ -8,6 +8,7 @@ import { styles } from './styles';
 
 const burger = require('../../../Assets/Burger.png');
 const close = require('../../../Assets/Close.png');
+const search = require('../../../Assets/SearchIcon.png');
 
 export default class Header extends Component {
   state = {
@@ -35,6 +36,9 @@ export default class Header extends Component {
       Navigator.goBack();
     }
   };
+  handleSearchIconPress = () => {
+    Navigator.navigate('OTTSearch');
+  };
   render() {
     const { isOpenBurger } = this.state;
     const { renderBurger, renderSearch, station, logo, navData, activePage } = this.props;
@@ -50,9 +54,9 @@ export default class Header extends Component {
           )}
           <FastImage source={{ uri: logo }} resizeMode="contain" style={styles.logo} />
           {renderSearch ? (
-            <View style={{ flex: 1, alignItems: 'flex-end' }}>
-              <View style={{ width: 20, height: 20, backgroundColor: 'red' }} />
-            </View>
+            <TouchableOpacity style={styles.searchBlock} onPress={this.handleSearchIconPress}>
+              <Image source={search} />
+            </TouchableOpacity>
           ) : station ? (
             <View style={styles.stationBlock}>
               <Text style={styles.station}>{station}</Text>

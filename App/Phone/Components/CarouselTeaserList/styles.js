@@ -7,6 +7,10 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: WIDTH,
   },
+  imageBlock: {
+    width: '100%',
+    height: '100%',
+  },
   descriptionBlock: {
     position: 'absolute',
     bottom: 50,

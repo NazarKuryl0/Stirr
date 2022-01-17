@@ -7,6 +7,7 @@ import ShowPage from './ShowPage/Reducers';
 import CitySelection from './CitySelection/Reducers';
 import OTTText from './OTTText/Reducers';
 import OTTEpisode from './OTTEpisode/Reducers';
+import OTTSearch from './OTTSearch/Reducers';
 import SectionPage from './SectionPage/Reducers';
 import rootSaga from '../Sagas';
 import configureStore from './CreateStore';
@@ -21,6 +22,7 @@ export default () => {
     CitySelection,
     OTTText,
     OTTEpisode,
+    OTTSearch,
     SectionPage,
   });
 

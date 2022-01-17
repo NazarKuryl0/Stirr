@@ -28,6 +28,7 @@ function* fetchConfig() {
       nav,
       channel_info: programsDataURL,
       channel_list: channelsListURL,
+      search_URL,
       vmap_generator,
       cust_params_extras,
       theme: {
@@ -67,6 +68,7 @@ function* fetchConfig() {
         appStyles,
         channelsListURL,
         programsDataURL,
+        search_URL,
         vmap_generator,
         cust_params_extras,
       },

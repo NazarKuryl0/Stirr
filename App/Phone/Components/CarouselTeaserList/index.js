@@ -8,7 +8,6 @@ import Navigator from '../../../Core/Services/NavigationService';
 
 import { styles } from './styles';
 
-const colors = ['blue', 'red', 'green', 'yellow', 'pink'];
 export default class CarouselTeaserList extends Component {
   state = {
     activeSlide: 0,
@@ -31,9 +30,7 @@ export default class CarouselTeaserList extends Component {
   renderItem = (i) => {
     const {
       item: { item },
-      index,
     } = i;
-    let ind = index > 5 ? index % 5 : index;
     const imageURL = item['media:content']['media:thumbnail'][2].url;
     const title = item['media:content']['media:title'].content;
     const subtitle = item['media:content']['media:description'].content;
@@ -41,7 +38,7 @@ export default class CarouselTeaserList extends Component {
       <TouchableOpacity onPress={this.handleItemPress.bind(this, item)}>
         <FastImage
           source={{ uri: imageURL, priority: FastImage.priority.high }}
-          style={{ width: '100%', height: '100%', backgroundColor: colors[ind] }}
+          style={styles.imageBlock}
         />
         <View style={styles.descriptionBlock}>
           <View style={styles.titleBlock}>

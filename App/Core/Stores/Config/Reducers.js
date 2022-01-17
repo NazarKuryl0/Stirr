@@ -8,6 +8,7 @@ const initialState = {
   programsDataURL: undefined,
   vmap_generator: undefined,
   cust_params_extras: undefined,
+  search_URL: undefined,
   error: undefined,
 };
 
@@ -24,6 +25,7 @@ const configReducer = (state = initialState, action) => {
         programsDataURL: undefined,
         vmap_generator: undefined,
         cust_params_extras: undefined,
+        search_URL: undefined,
       };
     case actionTypes.FETCH_CONFIG_SUCCEEDED:
       return {
@@ -36,6 +38,7 @@ const configReducer = (state = initialState, action) => {
         programsDataURL: action.payload.programsDataURL,
         vmap_generator: action.payload.vmap_generator,
         cust_params_extras: action.payload.cust_params_extras,
+        search_URL: action.payload.search_URL,
       };
     case actionTypes.FETCH_CONFIG_FAILED:
       return {
@@ -47,6 +50,7 @@ const configReducer = (state = initialState, action) => {
         programsDataURL: undefined,
         vmap_generator: undefined,
         cust_params_extras: undefined,
+        search_URL: undefined,
         error: action.error,
       };
     default:

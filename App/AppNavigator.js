@@ -3,15 +3,16 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import {
-  WelcomePage as WelcomePagePhone,
-  OTTPage as OTTPagePhone,
-  OTTEpisode as OTTEpisodePhone,
-  SectionPage as SectionPagePhone,
-  ShowPage as ShowPagePhone,
-  CitySelection as CitySelectionPhone,
-  OTTSettings as OTTSettingsPhone,
-  OTTText as OTTTextPhone,
-  OTTFeed as OTTFeedPhone,
+  WelcomePagePhone,
+  OTTPagePhone,
+  OTTEpisodePhone,
+  SectionPagePhone,
+  ShowPagePhone,
+  CitySelectionPhone,
+  OTTSettingsPhone,
+  OTTTextPhone,
+  OTTFeedPhone,
+  OTTSearchPhone,
 } from './Phone/Pages';
 
 let routeConfigMap;
@@ -28,6 +29,7 @@ if (Platform.isTVOS) {
     OTTSettings: OTTSettingsPhone,
     OTTText: OTTTextPhone,
     OTTFeed: OTTFeedPhone,
+    OTTSearch: OTTSearchPhone,
   };
 }
 

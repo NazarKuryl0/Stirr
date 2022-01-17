@@ -6,6 +6,7 @@ import ShowPage from './ShowPage';
 import CitySelection from './CitySelection';
 import OTTText from './OTTText';
 import OTTEpisode from './OTTEpisode';
+import OTTSearch from './OTTSearch';
 import SectionPage from './SectionPage';
 
 export default function* root() {
@@ -18,5 +19,6 @@ export default function* root() {
     SectionPage(),
     OTTText(),
     OTTEpisode(),
+    OTTSearch(),
   ]);
 }

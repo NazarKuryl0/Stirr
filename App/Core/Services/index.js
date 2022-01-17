@@ -66,3 +66,11 @@ export async function getExtraAdParams(url, station) {
     ...cust_params,
   };
 }
+
+export function getSuggestions(url, value) {
+  return axios.get(url, {
+    params: {
+      query: value,
+    },
+  });
+}
