@@ -14,7 +14,7 @@ export default class FullScreenCard extends Component {
   componentDidMount() {
     setInterval(() => {
       const { time } = this.state;
-      time > 0 ? this.setState({ time: time - 1 }) : this.setState({ disabledButton: false });
+      time > 1 ? this.setState({ time: time - 1 }) : this.setState({ disabledButton: false });
     }, 1000);
   }
   handleButtonPress = () => {

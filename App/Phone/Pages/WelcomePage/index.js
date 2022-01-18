@@ -17,7 +17,13 @@ class WelcomePage extends Component {
   };
   componentDidMount() {
     const { navData, fetchConfig } = this.props;
-    !navData && fetchConfig();
+    if (!navData) {
+      fetchConfig();
+    } else {
+      setTimeout(() => {
+        Navigator.navigateAndReset(navData[0].type);
+      }, 0);
+    }
   }
   componentDidUpdate() {
     const { navData, station } = this.props;

@@ -27,7 +27,7 @@ class Root extends Component {
   }
 }
 
-const mapStateToProps = ({ config: { appStyles }, common: {isLoading} }) => ({
+const mapStateToProps = ({ config: { appStyles }, common: { isLoading } }) => ({
   appStyles,
   isLoading,
 });
